@@ -20,7 +20,7 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
-  
+
   public static DriveTrain driveTrain;
   
 
@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
    RobotMap.init();
 
    oi = new OI();
-   
+
    driveTrain = new DriveTrain();
   }
 
