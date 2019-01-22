@@ -36,9 +36,9 @@ public class RobotMap {
   public static void init() {
     //PWM
     LFMotor = new Spark(0);//port0
-    LFMotor = new Spark(1);//port1
-    LFMotor = new Spark(2);//port2
-    LFMotor = new Spark(3);//port3
+    LBMotor = new Spark(1);//port1
+    RFMotor = new Spark(2);//port2
+    RBMotor = new Spark(3);//port3
     
     //DIO
 
