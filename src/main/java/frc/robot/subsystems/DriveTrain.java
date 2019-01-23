@@ -7,12 +7,21 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.MecaDrive;
+import edu.wpi.first.wpilibj.SpeedController;
+
+
+
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class ExampleSubsystem extends Subsystem {
+public class DriveTrain extends Subsystem {
+ 
+  
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -20,5 +29,13 @@ public class ExampleSubsystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+  public void mecaDrive() {
+    
+
+
+  }
+  public void stop() {
+
   }
 }
