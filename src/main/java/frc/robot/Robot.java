@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,6 +20,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
+  
+  public static DriveTrain driveTrain;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -26,9 +29,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    RobotMap.init();
-    
-    oi = new OI();
+   RobotMap.init();
+
+   oi = new OI();
+
+   driveTrain = new DriveTrain();
   }
 
   /**
@@ -79,7 +84,7 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-
+    
   }
 
   /**
@@ -96,7 +101,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    
+ 
   }
 
   /**

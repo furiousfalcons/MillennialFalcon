@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  * floating around.
  */
 public class RobotMap {
+  
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;
@@ -27,20 +28,21 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static SpeedController LFMotor; //Left Front Motor
-  public static SpeedController LBMotor; //Left Back Motor
-  public static SpeedController RFMotor; //Right Front Motor
-  public static SpeedController RBMotor; //Right Back Motor
+  public static SpeedController LFMotor; //left front motor
+  public static SpeedController LBMotor; //left back motor
+  public static SpeedController RFMotor; //right front motor
+  public static SpeedController RBMotor; //right back motor
 
   public static void init() {
     //PWM
-    LFMotor = new Spark(0); //Port 0
-    LBMotor = new Spark(1); //Port 1
-    RFMotor = new Spark(2); //Port 2
-    RBMotor = new Spark(3); //Port 3
-
+    LFMotor = new Spark(0);//port0
+    LBMotor = new Spark(1);//port1
+    RFMotor = new Spark(2);//port2
+    RBMotor = new Spark(3);//port3
+    
     //DIO
 
     //Analog
+
   }
 }
