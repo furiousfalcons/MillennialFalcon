@@ -32,10 +32,12 @@ public class DriveTrain extends Subsystem {
   }
   public void mecaDrive() {
     
+    
 
 
   }
   public void stop() {
+    RobotMap.driveTrain.driveCartesian(0.0, 0.0, 0.0);
 
   }
 }
