@@ -29,6 +29,6 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new NormalDrive());
   }
   public void normalDrive() {
-    drive.driveCartesian(Robot.oi.xbox1.getRawAxis(1), Robot.oi.xbox1.getRawAxis(0), Robot.oi.xbox1.getRawAxis(4));
+    drive.driveCartesian(-Robot.oi.controller1.getRawAxis(1), Robot.oi.controller1.getRawAxis(0), Robot.oi.controller1.getRawAxis(4));
   }
 }

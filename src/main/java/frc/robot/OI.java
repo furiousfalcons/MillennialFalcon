@@ -42,7 +42,7 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
   
-  public static XboxController controller1;
+  public XboxController controller1;
 
   public OI() {
     controller1 = new XboxController(0);
