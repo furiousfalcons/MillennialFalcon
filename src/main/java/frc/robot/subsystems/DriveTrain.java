@@ -20,7 +20,8 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
+  public static MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor,
+      RobotMap.RBMotor);
 
   @Override
   public void initDefaultCommand() {
@@ -28,7 +29,13 @@ public class DriveTrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new NormalDrive());
   }
+
   public void normalDrive() {
+    drive.driveCartesian(Robot.oi.xbox1.getRawAxis(1) / 2, Robot.oi.xbox1.getRawAxis(0) / 2,
+        Robot.oi.xbox1.getRawAxis(4));
+  }
+
+  public void fastDrive() {
     drive.driveCartesian(Robot.oi.xbox1.getRawAxis(1), Robot.oi.xbox1.getRawAxis(0), Robot.oi.xbox1.getRawAxis(4));
   }
 }
