@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.BoostDrive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,5 +49,8 @@ public class OI {
 
   public OI() {
     controller1 = new XboxController(0);
+    Button boostDriveButton = new JoystickButton(controller1, 8);
+    boostDriveButton.whenPressed(new BoostDrive());
+    boostDriveButton.close();
   }
 }
