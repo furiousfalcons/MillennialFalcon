@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MecaDrive;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.DriveTrain;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +29,14 @@ import frc.robot.subsystems.DriveTrain;
 public class Robot extends TimedRobot {
   public static OI oi;
   public static DriveTrain driveTrain;
+  public static CameraServer camera;
+  NetworkTable table;
+  
+  public Robot() {
 
+    
+  }
+    
   
 
   Command m_autonomousCommand;
@@ -44,6 +53,10 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     oi = new OI();
     RobotMap.init();
+    camera.getInstance().startAutomaticCapture();
+    
+    
+  
   
   }
 

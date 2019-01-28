@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Servo;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -25,6 +26,7 @@ public class RobotMap {
   public static SpeedController frontRightMotor;
   public static SpeedController backLeftMotor;
   public static SpeedController backRightMotor;
+  public static Servo cameraServo;
 
   
 
@@ -38,10 +40,17 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static void init() {
-    frontLeftMotor = new Spark(0);
+
+    //pwm
+    frontLeftMotor = new Spark(0); // portlandia
     frontRightMotor = new Spark(1);
     backLeftMotor = new Spark(2);
     backRightMotor = new Spark(3);
+
+    driveTrain.setSafetyEnabled(true);
+		driveTrain.setExpiration(0.1);
+    driveTrain.setMaxOutput(1.0);
+    cameraServo = new Servo(4);
 
 
   }
