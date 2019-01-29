@@ -44,6 +44,9 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+  
+  public static XboxController controller1;
+
 
   public XboxController xbox1;
 
@@ -52,5 +55,7 @@ public class OI {
     Button zoomButton = new JoystickButton(xbox1, 8);
     zoomButton.whenPressed(new fastDrive());
     zoomButton.close();
+
+  
   }
 }
