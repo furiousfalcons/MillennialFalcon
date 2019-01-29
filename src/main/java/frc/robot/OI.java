@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Fast;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,9 +45,13 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public static XboxController xbox1;
+  public XboxController xbox;
 
   public OI(){
-    xbox1 = new XboxController(0);
+    xbox = new XboxController(0);
+    Button Fast = new JoystickButton(xbox, 8);
+    Fast.whenPressed(new Fast()); 
+    Fast.close();
   }
 }
+
