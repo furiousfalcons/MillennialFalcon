@@ -29,11 +29,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    
    RobotMap.init();
-
+   driveTrain = new DriveTrain();
    oi = new OI();
 
-   driveTrain = new DriveTrain();
   }
 
   /**
