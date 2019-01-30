@@ -174,7 +174,6 @@ public class Vision implements VisionPipeline {
 	 * @param minVertexCount minimum vertex Count of the contours
 	 * @param maxVertexCount maximum vertex Count
 	 * @param minRatio minimum ratio of width to height
-	 * @param maxRatio maximum ratio of width to height
 	 */
 	private void filterContours(List<MatOfPoint> inputContours, double minArea,
 		double minPerimeter, double minWidth, double maxWidth, double minHeight, double
