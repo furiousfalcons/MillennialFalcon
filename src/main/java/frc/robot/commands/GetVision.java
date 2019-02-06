@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class BoostDrive extends Command {
-  public BoostDrive() {
+public class GetVision extends Command {
+  public GetVision() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.driveTrain);
+    requires(Robot.visionControl);
   }
 
   // Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class BoostDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.boostDrive();
+    Robot.visionControl.getVision();
   }
 
   // Make this return true when this Command no longer needs to run execute()
