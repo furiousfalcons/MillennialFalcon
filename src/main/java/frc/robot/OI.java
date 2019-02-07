@@ -52,6 +52,9 @@ public class OI {
     Button Fast = new JoystickButton(xbox, 8);
     Fast.whenPressed(new Fast()); 
     Fast.close();
+    Button armOut = new JoystickButton(xbox,1);
+    armOut.whenPressed(new putDisk);
+    armOut.close();
   }
 }
 
