@@ -47,7 +47,7 @@ public class VisionControl extends Subsystem {
 
     sink = CameraServer.getInstance().getVideo();
 
-    output = CameraServer.getInstance().putVideo("Processed: ", 640, 480);
+    output = CameraServer.getInstance().putVideo("Processed", 640, 480);
 
     visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
       if (!pipeline.filterContoursOutput().isEmpty()) {

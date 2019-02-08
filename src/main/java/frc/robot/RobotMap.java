@@ -33,12 +33,18 @@ public class RobotMap {
   public static SpeedController RFMotor; //right front motor
   public static SpeedController RBMotor; //right back motor
 
+  public static SpeedController PanelExtenderActuator; //actuator for extending the panel arm
+  public static SpeedController PanelAttacherActuators; //mini actuators for grabbing or attaching to the panel
+
   public static void init() {
     //PWM
-    LFMotor = new Spark(0);//port0
-    LBMotor = new Spark(1);//port1
-    RFMotor = new Spark(2);//port2
-    RBMotor = new Spark(3);//port3
+    LFMotor = new Spark(0); //port0
+    LBMotor = new Spark(1); //port1
+    RFMotor = new Spark(2); //port2
+    RBMotor = new Spark(3); //port3
+
+    PanelExtenderActuator = new Spark(4); //port 4
+    PanelAttacherActuators = new Spark(5); //port 5
     
     //DIO
 

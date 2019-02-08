@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.PanelManipulation;
 import frc.robot.subsystems.VisionControl;
 
 /**
@@ -24,6 +25,7 @@ public class Robot extends TimedRobot {
   
   public static DriveTrain driveTrain;
   public static VisionControl visionControl;
+  public static PanelManipulation panelManipulation;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -37,6 +39,7 @@ public class Robot extends TimedRobot {
 
    driveTrain = new DriveTrain();
    visionControl = new VisionControl();
+   panelManipulation = new PanelManipulation();
 
    oi = new OI();
   }
