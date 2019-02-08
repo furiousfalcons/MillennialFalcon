@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ArmExtend;
 import frc.robot.commands.FastDrive;
 
 /**
@@ -55,7 +56,9 @@ public class OI {
     Button zoomButton = new JoystickButton(xbox1, 8);
     zoomButton.whenPressed(new FastDrive());
     zoomButton.close();
-
+    Button armOut = new JoystickButton(xbox1, 1);
+    armOut.whenPressed(new ArmExtend());
+    armOut.close();
   
   }
 }

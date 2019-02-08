@@ -32,6 +32,7 @@ public class RobotMap {
   public static SpeedController LBMotor; //left back motor
   public static SpeedController RFMotor; //right front motor
   public static SpeedController RBMotor; //right back motor
+  public static SpeedController ArmMotor; //Actuator
 
   public static void init() {
     //PWM
@@ -39,6 +40,7 @@ public class RobotMap {
     LBMotor = new Spark(1);//port1
     RFMotor = new Spark(2);//port2
     RBMotor = new Spark(3);//port3
+    ArmMotor = new Spark(4);//port4
     
     //DIO
 
