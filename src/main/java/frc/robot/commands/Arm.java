@@ -24,6 +24,8 @@ public class Arm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.armcontroll.in();
+    Robot.armcontroll.out();
   }
 
   // Make this return true when this Command no longer needs to run execute()
