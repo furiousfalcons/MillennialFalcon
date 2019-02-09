@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.concurrent.TimeUnit;
+
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -21,6 +23,8 @@ public class PanelManipulation extends Subsystem {
   public static SpeedController extenderActuator = RobotMap.PanelExtenderActuator;
   public static SpeedController attatcherActuators = RobotMap.PanelAttacherActuators;
 
+  public static double extenderActuatorSpeed = 2.098;
+
   public PanelManipulation() {
     releasePanel();
   }
@@ -32,7 +36,43 @@ public class PanelManipulation extends Subsystem {
   }
 
   public void extendArm() {
+    extenderActuator.set(1);
+  }
 
+  public void stopArm() {
+    extenderActuator.stopMotor();
+  }
+
+  public void contractArm() {
+    extenderActuator.set(-1);
+  }
+
+  public void extendArmFor(double time) {
+    extendArm();
+    try {
+      TimeUnit.SECONDS.sleep(Double.doubleToLongBits(time));
+    } catch (Exception e) {
+      System.out.println("Failed to delay for extendArmFor time");
+    }
+    stopArm();
+  }
+
+  public void contractArmFor(double time) {
+    contractArm();
+    try {
+      TimeUnit.SECONDS.sleep(Double.doubleToLongBits(time));
+    } catch (Exception e) {
+      System.out.println("Failed to delay for contractArmFor time");
+    }
+    stopArm();
+  }
+
+  public void extendArmTo(double distance) { //distance in inches
+    extendArmFor((distance / extenderActuatorSpeed));
+  }
+
+  public void contractArmTo(double distance) { //distance in inches
+    contractArmFor((distance / extenderActuatorSpeed));
   }
 
   public void releasePanel() {

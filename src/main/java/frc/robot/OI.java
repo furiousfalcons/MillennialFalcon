@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.BoostDrive;
+import frc.robot.commands.ContractArm;
+import frc.robot.commands.ExtendArm;
+import frc.robot.commands.GrabPanel;
+import frc.robot.commands.ReleasePanel;
+import frc.robot.commands.StopArm;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,8 +54,32 @@ public class OI {
 
   public OI() {
     controller1 = new XboxController(0);
+
+    //Boost Button
     Button boostDriveButton = new JoystickButton(controller1, 8);
-    boostDriveButton.whenPressed(new BoostDrive());
+    boostDriveButton.whileHeld(new BoostDrive());
     boostDriveButton.close();
+
+    //Manual Panel Grab Button
+    Button panelGrabButton = new JoystickButton(controller1, 0);
+    panelGrabButton.whenPressed(new GrabPanel());
+    panelGrabButton.close();
+
+    //Manual Panel Release Button
+    Button panelReleaseButton = new JoystickButton(controller1, 1);
+    panelReleaseButton.whenPressed(new ReleasePanel());
+    panelReleaseButton.close();
+
+    //Manual Arm Extend Button
+    Button armExtendButton = new JoystickButton(controller1, 3);
+    armExtendButton.whenPressed(new ExtendArm());
+    armExtendButton.whenReleased(new StopArm());
+    armExtendButton.close();
+
+    //Manual Arm Contract Button
+    Button armContractButton = new JoystickButton(controller1, 2);
+    armContractButton.whenPressed(new ContractArm());
+    armContractButton.whenReleased(new StopArm());
+    armContractButton.close();
   }
 }
