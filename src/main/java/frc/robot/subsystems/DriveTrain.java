@@ -35,8 +35,6 @@ public class DriveTrain extends Subsystem {
     public void fastDrive(){
       drive.driveCartesian(Robot.oi.xbox.getRawAxis(1),Robot.oi.xbox.getRawAxis(0),Robot.oi.xbox.getRawAxis(4));
     }
-    public void putDisk(){
-     
-    }
+   
   }
 

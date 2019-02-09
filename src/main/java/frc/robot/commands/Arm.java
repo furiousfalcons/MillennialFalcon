@@ -13,7 +13,7 @@ public class Arm extends Command {
   public Arm() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires (Robot.driveTrain);
+    requires (Robot.armcontroll);
   }
 
   // Called just before this Command runs the first time
@@ -41,5 +41,6 @@ public class Arm extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

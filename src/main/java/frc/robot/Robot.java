@@ -9,7 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.ArmControll;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.VisionControll;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,7 +24,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   
   public static DriveTrain driveTrain;
-
+  public static ArmControll armcontroll;
   public static VisionControll visionControll;
 
   /**
@@ -34,9 +36,9 @@ public class Robot extends TimedRobot {
     
    RobotMap.init();
     driveTrain = new DriveTrain();
-    visionControll = new VisionControll;
+    visionControll = new VisionControll();
     oi = new OI();
-
+    armcontroll = new ArmControll();
   }
 
   /**
