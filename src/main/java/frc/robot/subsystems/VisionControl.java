@@ -70,7 +70,7 @@ public class VisionControl extends Subsystem {
     DisableDrive disableDrive = new DisableDrive();
     disableDrive.close();
 
-    
+
 
     //Re-Enable Manual Drive
     EnableDrive enableDrive = new EnableDrive();
