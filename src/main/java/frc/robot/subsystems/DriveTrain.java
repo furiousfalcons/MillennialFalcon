@@ -23,6 +23,10 @@ public class DriveTrain extends Subsystem {
   public static MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor,
       RobotMap.RBMotor);
 
+  public static boolean isManualEnabled = true;
+  public static boolean isAutoEnabled = true;
+  public static boolean isBoostDrive = false;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -31,12 +35,39 @@ public class DriveTrain extends Subsystem {
   }
 
   public void normalDrive() {
-    drive.driveCartesian(Robot.oi.controller1.getRawAxis(0) / 2, -Robot.oi.controller1.getRawAxis(1) / 2,
-        Robot.oi.controller1.getRawAxis(4));
+    if (isManualEnabled) {
+      if (isBoostDrive) {
+        drive.driveCartesian(-Robot.oi.controller1.getRawAxis(1), Robot.oi.controller1.getRawAxis(0),
+            Robot.oi.controller1.getRawAxis(4));
+      } else {
+        drive.driveCartesian(Robot.oi.controller1.getRawAxis(0) / 2, -Robot.oi.controller1.getRawAxis(1) / 2,
+            Robot.oi.controller1.getRawAxis(4));
+      }
+    }
   }
 
-  public void boostDrive() {
-    drive.driveCartesian(-Robot.oi.controller1.getRawAxis(1), Robot.oi.controller1.getRawAxis(0),
-        Robot.oi.controller1.getRawAxis(4));
+  public void toggleBoostDrive() {
+    isBoostDrive = !isBoostDrive;
   }
+
+  public void stopDrive() {
+    drive.driveCartesian(0, 0, 0);
+  }
+
+  public void toggleEnabled() {
+    isManualEnabled = !isManualEnabled;
+  }
+
+  public void disableDrive() {
+    isManualEnabled = false;
+  }
+
+  public void enableDrive() {
+    isManualEnabled = true;
+  }
+
+  public void autoNormalDrive(double ySpeed, double xSpeed, double zSpeed) {
+    drive.driveCartesian(ySpeed, xSpeed, zSpeed);
+  }
+
 }

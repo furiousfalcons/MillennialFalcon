@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.BoostDrive;
+import frc.robot.commands.ToggleBoostDrive;
 import frc.robot.commands.ContractArm;
 import frc.robot.commands.ExtendArm;
 import frc.robot.commands.GrabPanel;
@@ -56,8 +56,8 @@ public class OI {
     controller1 = new XboxController(0);
 
     //Boost Button
-    Button boostDriveButton = new JoystickButton(controller1, 8);
-    boostDriveButton.whileHeld(new BoostDrive());
+    Button boostDriveButton = new JoystickButton(controller1, 7);
+    boostDriveButton.whenPressed(new ToggleBoostDrive());
     boostDriveButton.close();
 
     //Manual Panel Grab Button

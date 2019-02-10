@@ -18,6 +18,8 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.VisionImplementation;
+import frc.robot.commands.DisableDrive;
+import frc.robot.commands.EnableDrive;
 import frc.robot.commands.InitVision;
 
 /**
@@ -63,7 +65,16 @@ public class VisionControl extends Subsystem {
     });
   }
 
-  public void getVision() {
+  public void autoAssist() {
+    //Disable Manual Drive
+    DisableDrive disableDrive = new DisableDrive();
+    disableDrive.close();
 
+    
+
+    //Re-Enable Manual Drive
+    EnableDrive enableDrive = new EnableDrive();
+    enableDrive.close();
   }
+
 }
