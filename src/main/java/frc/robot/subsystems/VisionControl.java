@@ -18,7 +18,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.VisionImplementation;
-import frc.robot.commands.GetVision;
+import frc.robot.commands.InitVision;
 
 /**
  * Add your docs here.
@@ -37,23 +37,33 @@ public class VisionControl extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new GetVision());
   }
 
-  public void getVision() {
+  public VisionControl() {
+    InitVision initVision = new InitVision();
+    initVision.close();
+  }
+
+  public void initVision() {
     cam = CameraServer.getInstance().startAutomaticCapture();
     cam.setExposureManual(20);
     cam.setResolution(640, 480);
 
     sink = CameraServer.getInstance().getVideo();
 
-    output = CameraServer.getInstance().putVideo("Processed", 640, 480);
+    output = CameraServer.getInstance().putVideo("MillennialFalconCam", 640, 480);
 
     visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
       if (!pipeline.filterContoursOutput().isEmpty()) {
-        Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-        System.out.println(r.x + ", " + r.y + ", " + r.width + ", " + r.height);
+        for (int i = 0; i < pipeline.filterContoursOutput().size(); i++) {
+          Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i));
+          System.out.println("Rectangle #" + i + ": " + r.x + ", " + r.y + ", " + r.width + ", " + r.height);
+        }
       }
     });
+  }
+
+  public void getVision() {
+
   }
 }

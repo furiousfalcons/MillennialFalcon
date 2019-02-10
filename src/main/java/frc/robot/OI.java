@@ -61,23 +61,23 @@ public class OI {
     boostDriveButton.close();
 
     //Manual Panel Grab Button
-    Button panelGrabButton = new JoystickButton(controller1, 0);
+    Button panelGrabButton = new JoystickButton(controller1, 1);
     panelGrabButton.whenPressed(new GrabPanel());
     panelGrabButton.close();
 
     //Manual Panel Release Button
-    Button panelReleaseButton = new JoystickButton(controller1, 1);
+    Button panelReleaseButton = new JoystickButton(controller1, 2);
     panelReleaseButton.whenPressed(new ReleasePanel());
     panelReleaseButton.close();
 
     //Manual Arm Extend Button
-    Button armExtendButton = new JoystickButton(controller1, 3);
+    Button armExtendButton = new JoystickButton(controller1, 4);
     armExtendButton.whenPressed(new ExtendArm());
     armExtendButton.whenReleased(new StopArm());
     armExtendButton.close();
 
     //Manual Arm Contract Button
-    Button armContractButton = new JoystickButton(controller1, 2);
+    Button armContractButton = new JoystickButton(controller1, 3);
     armContractButton.whenPressed(new ContractArm());
     armContractButton.whenReleased(new StopArm());
     armContractButton.close();
