@@ -32,7 +32,7 @@ public class RobotMap {
   public static SpeedController LBMotor; //left back motor
   public static SpeedController RFMotor; //right front motor
   public static SpeedController RBMotor; //right back motor
-  public static SpeedController Actuator; //Actuator for ramp
+  public static SpeedController Actuator; //Actuator for grabber
 
   public static void init() {
     //PWM

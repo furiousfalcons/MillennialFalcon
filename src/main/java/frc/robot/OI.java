@@ -56,6 +56,9 @@ public class OI {
     Button armOut = new JoystickButton(xbox,1);
     armOut.whenPressed(new Arm());
     armOut.close();
+    Button armIn = new JoystickButton(xbox,3);
+    armIn.whenPressed(new Arm());
+    armIn.close();
   }
 }
 
