@@ -8,12 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class ArmControll extends Subsystem {
+public class RampControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -21,18 +20,5 @@ public class ArmControll extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-  }
-
-  public void out() {
-    RobotMap.Actuator.set(.75);
-  }
-  public void in(){
-    RobotMap.Actuator.set(-0.75);
-  }
-  public void grab(){
-    RobotMap.Grabber.set(1);
-  }
-  public void ungrab(){
-    RobotMap.Grabber.set(-1);
   }
 }

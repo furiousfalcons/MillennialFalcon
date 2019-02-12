@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Arm extends Command {
-  public Arm() {
+public class Grab extends Command {
+  public Grab() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires (Robot.armcontroll);
+    requires(Robot.armcontroll);
   }
 
   // Called just before this Command runs the first time
@@ -25,8 +25,7 @@ public class Arm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.armcontroll.in();
-    Robot.armcontroll.out();
+    Robot.armcontroll.grab();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,6 +43,5 @@ public class Arm extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
