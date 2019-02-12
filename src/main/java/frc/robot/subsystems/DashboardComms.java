@@ -19,6 +19,7 @@ public class DashboardComms extends Subsystem {
   // here. Call these from Commands.
 
   public ShuffleboardTab tab;
+  public ShuffleboardComponent camera;
   public NetworkTableEntry entryIsVisionTargets;
   public NetworkTableEntry entryIsAutoAssist;
   public NetworkTableEntry entryLFMotor;
@@ -34,16 +35,17 @@ public class DashboardComms extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // setDefaultCommand(new MySpecialCommand()); 
   }
 
   public void initDashboard() {
+    tab = Shuffleboard.getTab("MillennialFalconDashboard");
     entryIsVisionTargets = tab.add("Falcon Vision Targets Found", false).getEntry();
     entryIsAutoAssist = tab.add("Falcon Auto Assist", false).getEntry();
-    entryLFMotor = tab.add("Left Front Motor", 0.0).getEntry();
+    /*entryLFMotor = tab.add("Left Front Motor", 0.0).getEntry();
     entryLBMotor = tab.add("Left Back Motor", 0.0).getEntry();
     entryRFMotor = tab.add("Right Front Motor", 0.0).getEntry();
-    entryRBMotor = tab.add("Right Back Motor", 0.0).getEntry();
+    entryRBMotor = tab.add("Right Back Motor", 0.0).getEntry();*/
     entryThrottle = tab.add("Throttle", 50).getEntry();
   }
 }

@@ -52,9 +52,11 @@ public class VisionControl extends Subsystem {
   public void initVision() {
     cam = CameraServer.getInstance().startAutomaticCapture("Falcon Cam", 0);
     cam.setExposureManual(20);
+    cam.setFPS(10);
     cam.setResolution(camResX, camResY);
 
     visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
+      System.out.println(pipeline.filterContoursOutput().size());
       if (pipeline.filterContoursOutput().size() == 2) {
         Robot.dashComms.entryIsVisionTargets.setBoolean(true);
         Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
