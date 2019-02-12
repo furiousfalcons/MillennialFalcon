@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.Arm;
 
 /**
  * Add your docs here.
@@ -20,5 +22,14 @@ public class ArmControl extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new Arm());
+  }
+
+  public void out() {
+    RobotMap.Actuator.set(0.75);
+  }
+
+  public void in() {
+    RobotMap.Actuator.set(-0.75);
   }
 }

@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.ArmControl;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.VisionControl;
 
@@ -26,6 +27,8 @@ public class Robot extends TimedRobot {
 
   public static VisionControl visionControl;
 
+  public static ArmControl armControl;
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -39,6 +42,8 @@ public class Robot extends TimedRobot {
    visionControl = new VisionControl();
 
    oi = new OI();
+
+   armControl = new ArmControl();
 
   }
 
