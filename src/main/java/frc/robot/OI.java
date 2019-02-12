@@ -10,8 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.Arm;
+import frc.robot.commands.ArmIn;
+import frc.robot.commands.ArmOut;
 import frc.robot.commands.FastDrive;
+import frc.robot.commands.HandIn;
+import frc.robot.commands.HandOut;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -54,16 +57,21 @@ public class OI {
   public OI(){
     xbox1 = new XboxController(0);
 
-    Button zoomButton = new JoystickButton(xbox1, 8);
+    Button zoomButton = new JoystickButton(xbox1, 8); //left stick click
     zoomButton.whenPressed(new FastDrive());
     zoomButton.close();
 
-    Button armOut = new JoystickButton(xbox1, 1);
-    armOut.whenPressed(new Arm());
+    Button armOut = new JoystickButton(xbox1, 1); //a
+    armOut.whenPressed(new ArmOut());
     armOut.close();
 
-    Button armIn = new JoystickButton(xbox1, 3);
-    armIn.whenPressed(new Arm());
+    Button armIn = new JoystickButton(xbox1, 3); //x
+    armIn.whenPressed(new ArmIn());
     armIn.close();
+
+    Button handTogg = new JoystickButton(xbox1, 4); //y
+    handTogg.whenPressed(new HandOut());
+    handTogg.whenReleased(new HandIn());
+    handTogg.close();
   }
 }

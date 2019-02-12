@@ -8,38 +8,21 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class ArmControl extends Subsystem {
+public class Dash extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  public Dash() {
+    //todo
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-  }
-
-  public void out() {
-    RobotMap.BigActuator.set(1);
-  }
-
-  public void in() {
-    RobotMap.BigActuator.set(-1);
-  }
-
-  public void stop() {
-    RobotMap.BigActuator.set(0);
-  }
-
-  public void grabOut() {
-    RobotMap.HandActuator.set(0);
-  }
-
-  public void grabIn() {
-    RobotMap.HandActuator.set(1);
   }
 }

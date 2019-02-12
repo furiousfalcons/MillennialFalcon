@@ -9,8 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import frc.robot.RobotMap;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.commands.NormalDrive;
 
 /**
@@ -36,7 +36,5 @@ public class DriveTrain extends Subsystem {
   public void fastDrive() {
     drive.driveCartesian(Robot.oi.xbox1.getRawAxis(1), Robot.oi.xbox1.getRawAxis(0), Robot.oi.xbox1.getRawAxis(4));
   }
-
-
   
 }
