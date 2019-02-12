@@ -26,7 +26,7 @@ public class PanelManipulation extends Subsystem {
   public static double extenderActuatorSpeed = 2.098;
 
   public PanelManipulation() {
-    releasePanel();
+    togglePanel();
   }
 
   @Override
@@ -75,11 +75,12 @@ public class PanelManipulation extends Subsystem {
     contractArmFor((distance / extenderActuatorSpeed));
   }
 
-  public void releasePanel() {
-    attatcherActuators.set(1);
-  }
-
-  public void grabPanel() {
-    attatcherActuators.set(0);
+  public void togglePanel() {
+    double i = attatcherActuators.get();
+    if (i == 1) {
+      attatcherActuators.set(0);
+    } else {
+      attatcherActuators.set(1);
+    }
   }
 }

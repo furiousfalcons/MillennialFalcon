@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ToggleBoostDrive extends Command {
-  public ToggleBoostDrive() {
+public class IncreaseThrottle extends Command {
+  public IncreaseThrottle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
@@ -25,7 +25,7 @@ public class ToggleBoostDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.toggleBoostDrive();
+    Robot.driveTrain.incThrottle();
   }
 
   // Make this return true when this Command no longer needs to run execute()

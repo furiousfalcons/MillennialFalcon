@@ -7,8 +7,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.subsystems.DashboardComms;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PanelManipulation;
 import frc.robot.subsystems.VisionControl;
@@ -22,44 +25,48 @@ import frc.robot.subsystems.VisionControl;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
-  
+
+  // Subsystems
   public static DriveTrain driveTrain;
   public static VisionControl visionControl;
   public static PanelManipulation panelManipulation;
+  public static DashboardComms dashComms;
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
     startUp();
 
-   RobotMap.init();
+    RobotMap.init();
 
-   driveTrain = new DriveTrain();
-   visionControl = new VisionControl();
-   panelManipulation = new PanelManipulation();
+    driveTrain = new DriveTrain();
+    visionControl = new VisionControl();
+    panelManipulation = new PanelManipulation();
+    dashComms = new DashboardComms();
 
-   oi = new OI();
+    oi = new OI();
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
+   * This function is called every robot packet, no matter the mode. Use this for
+   * items like diagnostics that you want ran during disabled, autonomous,
+   * teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
   }
 
   /**
-   * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
-   * the robot is disabled.
+   * This function is called once each time the robot enters Disabled mode. You
+   * can use it to reset any subsystem information you want to clear when the
+   * robot is disabled.
    */
   @Override
   public void disabledInit() {
@@ -72,27 +79,28 @@ public class Robot extends TimedRobot {
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString code to get the auto name from the text box below the Gyro
+   * between different autonomous modes using the dashboard. The sendable chooser
+   * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+   * remove all of the chooser code and uncomment the getString code to get the
+   * auto name from the text box below the Gyro
    *
-   * <p>You can add additional auto modes by adding additional commands to the
-   * chooser code above (like the commented example) or additional comparisons
-   * to the switch structure below with additional strings & commands.
+   * <p>
+   * You can add additional auto modes by adding additional commands to the
+   * chooser code above (like the commented example) or additional comparisons to
+   * the switch structure below with additional strings & commands.
    */
   @Override
   public void autonomousInit() {
 
     /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
+     * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+     * switch(autoSelected) { case "My Auto": autonomousCommand = new
+     * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
+     * ExampleCommand(); break; }
      */
 
     // schedule the autonomous command (example)
-    
+
   }
 
   /**
@@ -109,7 +117,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
- 
+
   }
 
   /**
@@ -128,6 +136,7 @@ public class Robot extends TimedRobot {
   }
 
   public void startUp() {
-    System.out.println("\r\n__/\\\\\\\\____________/\\\\\\\\________/\\\\\\\\\\\\_____/\\\\\\\\\\\\_____________________________________________________________________/\\\\\\\\\\\\____                 \r\n _\\/\\\\\\\\\\\\________/\\\\\\\\\\\\_______\\////\\\\\\____\\////\\\\\\____________________________________________________________________\\////\\\\\\____                \r\n  _\\/\\\\\\//\\\\\\____/\\\\\\//\\\\\\__/\\\\\\____\\/\\\\\\_______\\/\\\\\\________________________________________________/\\\\\\___________________\\/\\\\\\____               \r\n   _\\/\\\\\\\\///\\\\\\/\\\\\\/_\\/\\\\\\_\\///_____\\/\\\\\\_______\\/\\\\\\________/\\\\\\\\\\\\\\\\___/\\\\/\\\\\\\\\\\\____/\\\\/\\\\\\\\\\\\___\\///___/\\\\\\\\\\\\\\\\\\_______\\/\\\\\\____              \r\n    _\\/\\\\\\__\\///\\\\\\/___\\/\\\\\\__/\\\\\\____\\/\\\\\\_______\\/\\\\\\______/\\\\\\/////\\\\\\_\\/\\\\\\////\\\\\\__\\/\\\\\\////\\\\\\___/\\\\\\_\\////////\\\\\\______\\/\\\\\\____             \r\n     _\\/\\\\\\____\\///_____\\/\\\\\\_\\/\\\\\\____\\/\\\\\\_______\\/\\\\\\_____/\\\\\\\\\\\\\\\\\\\\\\__\\/\\\\\\__\\//\\\\\\_\\/\\\\\\__\\//\\\\\\_\\/\\\\\\___/\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\____            \r\n      _\\/\\\\\\_____________\\/\\\\\\_\\/\\\\\\____\\/\\\\\\_______\\/\\\\\\____\\//\\\\///////___\\/\\\\\\___\\/\\\\\\_\\/\\\\\\___\\/\\\\\\_\\/\\\\\\__/\\\\\\/////\\\\\\_____\\/\\\\\\____           \r\n       _\\/\\\\\\_____________\\/\\\\\\_\\/\\\\\\__/\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\__\\//\\\\\\\\\\\\\\\\\\\\_\\/\\\\\\___\\/\\\\\\_\\/\\\\\\___\\/\\\\\\_\\/\\\\\\_\\//\\\\\\\\\\\\\\\\/\\\\__/\\\\\\\\\\\\\\\\\\_          \r\n        _\\///______________\\///__\\///__\\/////////__\\/////////____\\//////////__\\///____\\///__\\///____\\///__\\///___\\////////\\//__\\/////////__         \r\n ________________________________/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_________________/\\\\\\\\\\\\__________________________________________________________________         \r\n  _______________________________\\/\\\\\\///////////_________________\\////\\\\\\__________________________________________________________________        \r\n   _______________________________\\/\\\\\\_______________________________\\/\\\\\\__________________________________________________________________       \r\n    _______________________________\\/\\\\\\\\\\\\\\\\\\\\\\______/\\\\\\\\\\\\\\\\\\_______\\/\\\\\\________/\\\\\\\\\\\\\\\\_____/\\\\\\\\\\_____/\\\\/\\\\\\\\\\\\_______________________      \r\n     _______________________________\\/\\\\\\///////______\\////////\\\\\\______\\/\\\\\\______/\\\\\\//////____/\\\\\\///\\\\\\__\\/\\\\\\////\\\\\\______________________     \r\n      _______________________________\\/\\\\\\_______________/\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\_____/\\\\\\__________/\\\\\\__\\//\\\\\\_\\/\\\\\\__\\//\\\\\\_____________________    \r\n       _______________________________\\/\\\\\\______________/\\\\\\/////\\\\\\_____\\/\\\\\\____\\//\\\\\\________\\//\\\\\\__/\\\\\\__\\/\\\\\\___\\/\\\\\\_____________________   \r\n        _______________________________\\/\\\\\\_____________\\//\\\\\\\\\\\\\\\\/\\\\__/\\\\\\\\\\\\\\\\\\__\\///\\\\\\\\\\\\\\\\__\\///\\\\\\\\\\/___\\/\\\\\\___\\/\\\\\\_____________________  \r\n         _______________________________\\///_______________\\////////\\//__\\/////////_____\\////////_____\\/////_____\\///____\\///______________________ \r\n ");
+    System.out.println(
+        "\r\n__/\\\\\\\\____________/\\\\\\\\________/\\\\\\\\\\\\_____/\\\\\\\\\\\\_____________________________________________________________________/\\\\\\\\\\\\____                 \r\n _\\/\\\\\\\\\\\\________/\\\\\\\\\\\\_______\\////\\\\\\____\\////\\\\\\____________________________________________________________________\\////\\\\\\____                \r\n  _\\/\\\\\\//\\\\\\____/\\\\\\//\\\\\\__/\\\\\\____\\/\\\\\\_______\\/\\\\\\________________________________________________/\\\\\\___________________\\/\\\\\\____               \r\n   _\\/\\\\\\\\///\\\\\\/\\\\\\/_\\/\\\\\\_\\///_____\\/\\\\\\_______\\/\\\\\\________/\\\\\\\\\\\\\\\\___/\\\\/\\\\\\\\\\\\____/\\\\/\\\\\\\\\\\\___\\///___/\\\\\\\\\\\\\\\\\\_______\\/\\\\\\____              \r\n    _\\/\\\\\\__\\///\\\\\\/___\\/\\\\\\__/\\\\\\____\\/\\\\\\_______\\/\\\\\\______/\\\\\\/////\\\\\\_\\/\\\\\\////\\\\\\__\\/\\\\\\////\\\\\\___/\\\\\\_\\////////\\\\\\______\\/\\\\\\____             \r\n     _\\/\\\\\\____\\///_____\\/\\\\\\_\\/\\\\\\____\\/\\\\\\_______\\/\\\\\\_____/\\\\\\\\\\\\\\\\\\\\\\__\\/\\\\\\__\\//\\\\\\_\\/\\\\\\__\\//\\\\\\_\\/\\\\\\___/\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\____            \r\n      _\\/\\\\\\_____________\\/\\\\\\_\\/\\\\\\____\\/\\\\\\_______\\/\\\\\\____\\//\\\\///////___\\/\\\\\\___\\/\\\\\\_\\/\\\\\\___\\/\\\\\\_\\/\\\\\\__/\\\\\\/////\\\\\\_____\\/\\\\\\____           \r\n       _\\/\\\\\\_____________\\/\\\\\\_\\/\\\\\\__/\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\__\\//\\\\\\\\\\\\\\\\\\\\_\\/\\\\\\___\\/\\\\\\_\\/\\\\\\___\\/\\\\\\_\\/\\\\\\_\\//\\\\\\\\\\\\\\\\/\\\\__/\\\\\\\\\\\\\\\\\\_          \r\n        _\\///______________\\///__\\///__\\/////////__\\/////////____\\//////////__\\///____\\///__\\///____\\///__\\///___\\////////\\//__\\/////////__         \r\n ________________________________/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_________________/\\\\\\\\\\\\__________________________________________________________________         \r\n  _______________________________\\/\\\\\\///////////_________________\\////\\\\\\__________________________________________________________________        \r\n   _______________________________\\/\\\\\\_______________________________\\/\\\\\\__________________________________________________________________       \r\n    _______________________________\\/\\\\\\\\\\\\\\\\\\\\\\______/\\\\\\\\\\\\\\\\\\_______\\/\\\\\\________/\\\\\\\\\\\\\\\\_____/\\\\\\\\\\_____/\\\\/\\\\\\\\\\\\_______________________      \r\n     _______________________________\\/\\\\\\///////______\\////////\\\\\\______\\/\\\\\\______/\\\\\\//////____/\\\\\\///\\\\\\__\\/\\\\\\////\\\\\\______________________     \r\n      _______________________________\\/\\\\\\_______________/\\\\\\\\\\\\\\\\\\\\_____\\/\\\\\\_____/\\\\\\__________/\\\\\\__\\//\\\\\\_\\/\\\\\\__\\//\\\\\\_____________________    \r\n       _______________________________\\/\\\\\\______________/\\\\\\/////\\\\\\_____\\/\\\\\\____\\//\\\\\\________\\//\\\\\\__/\\\\\\__\\/\\\\\\___\\/\\\\\\_____________________   \r\n        _______________________________\\/\\\\\\_____________\\//\\\\\\\\\\\\\\\\/\\\\__/\\\\\\\\\\\\\\\\\\__\\///\\\\\\\\\\\\\\\\__\\///\\\\\\\\\\/___\\/\\\\\\___\\/\\\\\\_____________________  \r\n         _______________________________\\///_______________\\////////\\//__\\/////////_____\\////////_____\\/////_____\\///____\\///______________________ \r\n ");
   }
 }

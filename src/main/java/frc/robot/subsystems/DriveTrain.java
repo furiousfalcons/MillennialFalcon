@@ -20,12 +20,12 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor,
+  public MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor,
       RobotMap.RBMotor);
 
-  public static boolean isManualEnabled = true;
-  public static boolean isAutoEnabled = true;
-  public static boolean isBoostDrive = false;
+  public boolean isManualEnabled = true;
+  
+  public double throttle = .5;
 
   @Override
   public void initDefaultCommand() {
@@ -36,18 +36,9 @@ public class DriveTrain extends Subsystem {
 
   public void normalDrive() {
     if (isManualEnabled) {
-      if (isBoostDrive) {
-        drive.driveCartesian(-Robot.oi.controller1.getRawAxis(1), Robot.oi.controller1.getRawAxis(0),
+      drive.driveCartesian(Robot.oi.controller1.getRawAxis(0) * throttle, -Robot.oi.controller1.getRawAxis(1) * throttle,
             Robot.oi.controller1.getRawAxis(4));
-      } else {
-        drive.driveCartesian(Robot.oi.controller1.getRawAxis(0) / 2, -Robot.oi.controller1.getRawAxis(1) / 2,
-            Robot.oi.controller1.getRawAxis(4));
-      }
     }
-  }
-
-  public void toggleBoostDrive() {
-    isBoostDrive = !isBoostDrive;
   }
 
   public void stopDrive() {
@@ -64,6 +55,20 @@ public class DriveTrain extends Subsystem {
 
   public void enableDrive() {
     isManualEnabled = true;
+  }
+
+  public void incThrottle() {
+    double percent = throttle * 100;
+    percent += 1;
+    throttle = percent / 100;
+    Robot.dashComms.entryThrottle.setDouble(percent);
+  }
+
+  public void decThrottle() {
+    double percent = throttle * 100;
+    percent -= 1;
+    throttle = percent / 100;
+    Robot.dashComms.entryThrottle.setDouble(percent);
   }
 
   public void autoNormalDrive(double ySpeed, double xSpeed, double zSpeed) {

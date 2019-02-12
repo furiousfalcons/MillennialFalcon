@@ -7,20 +7,17 @@
 
 package frc.robot.subsystems;
 
-import org.opencv.core.Mat;
+import java.util.ArrayList;
+
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.VisionImplementation;
-import frc.robot.commands.DisableDrive;
-import frc.robot.commands.EnableDrive;
-import frc.robot.commands.InitVision;
 
 /**
  * Add your docs here.
@@ -31,9 +28,20 @@ public class VisionControl extends Subsystem {
 
   VisionThread visionThread;
   UsbCamera cam;
-  CvSink sink;
-  CvSource output;
-  Mat mat;
+
+  int camResX = 640;
+  int camResY = 480;
+
+  double centerXLeft = 0.0;
+  double centerYLeft = 0.0;
+  double centerXRight = 0.0;
+  double centerYRight = 0.0;
+
+  Object imgLock = new Object();
+
+  public VisionControl() {
+    initVision();
+  }
 
   @Override
   public void initDefaultCommand() {
@@ -41,40 +49,37 @@ public class VisionControl extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public VisionControl() {
-    InitVision initVision = new InitVision();
-    initVision.close();
-  }
-
   public void initVision() {
-    cam = CameraServer.getInstance().startAutomaticCapture();
+    cam = CameraServer.getInstance().startAutomaticCapture("Falcon Cam", 0);
     cam.setExposureManual(20);
-    cam.setResolution(640, 480);
-
-    sink = CameraServer.getInstance().getVideo();
-
-    output = CameraServer.getInstance().putVideo("MillennialFalconCam", 640, 480);
+    cam.setResolution(camResX, camResY);
 
     visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
-      if (!pipeline.filterContoursOutput().isEmpty()) {
-        for (int i = 0; i < pipeline.filterContoursOutput().size(); i++) {
-          Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(i));
-          System.out.println("Rectangle #" + i + ": " + r.x + ", " + r.y + ", " + r.width + ", " + r.height);
+      if (pipeline.filterContoursOutput().size() == 2) {
+        Robot.dashComms.entryIsVisionTargets.setBoolean(true);
+        Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+        Rect r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+        synchronized (imgLock) {
+          centerXLeft = r1.x + (r1.width / 2);
+          centerYLeft = r1.y + (r1.height / 2);
+          centerXRight = r2.x + (r2.width / 2);
+          centerYRight = r2.y + (r2.height / 2);
         }
+      } else {
+        Robot.dashComms.entryIsVisionTargets.setBoolean(false);
       }
     });
+
+    visionThread.start();
   }
 
-  public void autoAssist() {
-    //Disable Manual Drive
-    DisableDrive disableDrive = new DisableDrive();
-    disableDrive.close();
-
-
-
-    //Re-Enable Manual Drive
-    EnableDrive enableDrive = new EnableDrive();
-    enableDrive.close();
+  public ArrayList<Double> getCenters() {
+    ArrayList<Double> values = new ArrayList<Double>();
+    values.add(centerXLeft);
+    values.add(centerYLeft);
+    values.add(centerXRight);
+    values.add(centerYRight);
+    return values;
   }
 
 }

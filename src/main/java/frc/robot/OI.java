@@ -10,12 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ToggleBoostDrive;
 import frc.robot.commands.ContractArm;
+import frc.robot.commands.DecreaseThrottle;
+import frc.robot.commands.EnableAutoAssist;
 import frc.robot.commands.ExtendArm;
-import frc.robot.commands.GrabPanel;
-import frc.robot.commands.ReleasePanel;
+import frc.robot.commands.IncreaseThrottle;
 import frc.robot.commands.StopArm;
+import frc.robot.commands.TogglePanel;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -55,20 +56,25 @@ public class OI {
   public OI() {
     controller1 = new XboxController(0);
 
-    //Boost Button
-    Button boostDriveButton = new JoystickButton(controller1, 7);
-    boostDriveButton.whenPressed(new ToggleBoostDrive());
-    boostDriveButton.close();
+    //Enable Auto Assist Button
+    Button autoAssistButton = new JoystickButton(controller1, 1);
+    autoAssistButton.whenPressed(new EnableAutoAssist());
+    autoAssistButton.close();
 
-    //Manual Panel Grab Button
-    Button panelGrabButton = new JoystickButton(controller1, 1);
-    panelGrabButton.whenPressed(new GrabPanel());
-    panelGrabButton.close();
+    //Increase Throttle Button
+    Button incThrottleButton = new JoystickButton(controller1, 5);
+    incThrottleButton.whileHeld(new IncreaseThrottle());
+    incThrottleButton.close();
 
-    //Manual Panel Release Button
-    Button panelReleaseButton = new JoystickButton(controller1, 2);
-    panelReleaseButton.whenPressed(new ReleasePanel());
-    panelReleaseButton.close();
+    //Decrease Throttle Button
+    Button decThrottleButton = new JoystickButton(controller1, 6);
+    decThrottleButton.whileHeld(new DecreaseThrottle());
+    decThrottleButton.close();
+
+    //Manual Panel Toggle Button
+    Button panelToggleButton = new JoystickButton(controller1, 2);
+    panelToggleButton.whenPressed(new TogglePanel());
+    panelToggleButton.close();
 
     //Manual Arm Extend Button
     Button armExtendButton = new JoystickButton(controller1, 4);
