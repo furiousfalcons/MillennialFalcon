@@ -27,6 +27,8 @@ public class RobotMap {
   public static SpeedController backLeftMotor;
   public static SpeedController backRightMotor;
   public static Servo cameraServo;
+  public static SpeedController Extender; //actuator for extending arm
+  public static SpeedController Grabber; // actuator for grabbing
 
   
 
@@ -46,6 +48,14 @@ public class RobotMap {
     frontRightMotor = new Spark(1);
     backLeftMotor = new Spark(2);
     backRightMotor = new Spark(3);
+    Extender = new Spark(4);
+    Grabber = new Spark(5);
+
+
+
+
+
+
 
     driveTrain.setSafetyEnabled(true);
 		driveTrain.setExpiration(0.1);

@@ -11,13 +11,20 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.MecaDrive;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.networktables.NetworkTable;
+
+import org.opencv.core.Mat;
+
+import edu.wpi.first.vision.VisionPipeline;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.vision.VisionThread;
+import edu.wpi.first.wpilibj.vision.VisionRunner;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,17 +34,12 @@ import edu.wpi.first.wpilibj.CameraServer;
  * project.
  */
 public class Robot extends TimedRobot {
+
   public static OI oi;
   public static DriveTrain driveTrain;
   public static CameraServer camera;
-  NetworkTable table;
-  
-  public Robot() {
+  public static HatchPanel hatchPanel;
 
-    
-  }
-    
-  
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -52,12 +54,9 @@ public class Robot extends TimedRobot {
     
     driveTrain = new DriveTrain();
     oi = new OI();
+    hatchPanel = new HatchPanel();
     RobotMap.init();
-    camera.getInstance().startAutomaticCapture();
-    
-    
-  
-  
+
   }
 
   /**
