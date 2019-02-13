@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class ExtendArm extends Command {
   public ExtendArm() {
@@ -23,6 +24,9 @@ public class ExtendArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    
+    Robot.arm.extend();
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,6 +38,8 @@ public class ExtendArm extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.arm.retract();
+
   }
 
   // Called when another command which requires one or more of the same

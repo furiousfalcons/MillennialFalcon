@@ -8,14 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Robot;
 
-public class GrabPanel extends Command {
-  public GrabPanel() {
+public class ReleasePanel extends Command {
+  public ReleasePanel() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.hatchPanel);
   }
 
   // Called just before this Command runs the first time
@@ -26,8 +23,6 @@ public class GrabPanel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchPanel.grab();
-    double getHatch = Robot.oi.xbox.getRawAxis(2);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +34,6 @@ public class GrabPanel extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatchPanel.release();
   }
 
   // Called when another command which requires one or more of the same

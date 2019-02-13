@@ -8,22 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.vision.VisionThread;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.Vision;
-import edu.wpi.first.wpilibj.CameraServer;
-
 
 /**
- * Add your docs here.  
+ * Add your docs here.
  */
-public class Grip extends Subsystem {
-  VisionThread visionThread;
-  UsbCamera camera;
-  Vision vision;
-
-
+public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -32,14 +21,11 @@ public class Grip extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+  public void extend() {
 
-  public void getVision() {
-    camera = CameraServer.getInstance().startAutomaticCapture();
-    camera.setResolution(640, 480);
   }
-  public void stahp() {
-
-
-
+  public void retract() {
+    
+  }
 }
-}
+

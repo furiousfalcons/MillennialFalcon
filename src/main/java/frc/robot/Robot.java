@@ -39,6 +39,8 @@ public class Robot extends TimedRobot {
   public static DriveTrain driveTrain;
   public static CameraServer camera;
   public static HatchPanel hatchPanel;
+  public static VisionControl visionControl;
+  public static Arm arm;
 
 
   Command m_autonomousCommand;
@@ -55,6 +57,8 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     oi = new OI();
     hatchPanel = new HatchPanel();
+    visionControl = new VisionControl();
+    arm = new Arm();
     RobotMap.init();
 
   }

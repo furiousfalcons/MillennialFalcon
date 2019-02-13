@@ -9,13 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Grip; 
+import frc.robot.subsystems.VisionControl;
+import frc.robot.subsystems.*;
 
 
 public class Vision extends Command {
   public Vision() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.grip);
+    requires(Robot.visionControl);
 
   }
 
@@ -28,7 +29,7 @@ public class Vision extends Command {
   @Override
   protected void execute() {
 
-    Robot.grip.getVision();
+    Robot.visionControl.getVision();
   }
 
   // Make this return true when this Command no longer needs to run execute()
