@@ -20,10 +20,14 @@ public class PanelManipulation extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static SpeedController extenderActuator = RobotMap.PanelExtenderActuator;
-  public static SpeedController attatcherActuators = RobotMap.PanelAttacherActuators;
+  public boolean isEnabled = true;
 
-  public static double extenderActuatorSpeed = 2.098;
+  public SpeedController extenderActuator = RobotMap.PanelExtenderActuator;
+  public SpeedController attatcherActuators = RobotMap.PanelAttacherActuators;
+
+  public double extenderActuatorSpeed = 2.098;
+
+  public boolean attatcherAcuatorsOut = true;
 
   public PanelManipulation() {
     togglePanel();
@@ -36,15 +40,21 @@ public class PanelManipulation extends Subsystem {
   }
 
   public void extendArm() {
-    extenderActuator.set(1);
+    if (isEnabled) {
+      extenderActuator.set(1);
+    }
   }
 
   public void stopArm() {
-    extenderActuator.stopMotor();
+    if (isEnabled) {
+      extenderActuator.stopMotor();
+  }
   }
 
   public void contractArm() {
-    extenderActuator.set(-1);
+    if (isEnabled) {
+      extenderActuator.set(-1);
+    }
   }
 
   public void extendArmFor(double time) {
@@ -67,20 +77,31 @@ public class PanelManipulation extends Subsystem {
     stopArm();
   }
 
-  public void extendArmTo(double distance) { //distance in inches
+  public void extendArmTo(double distance) { // distance in inches
     extendArmFor((distance / extenderActuatorSpeed));
   }
 
-  public void contractArmTo(double distance) { //distance in inches
+  public void contractArmTo(double distance) { // distance in inches
     contractArmFor((distance / extenderActuatorSpeed));
   }
 
   public void togglePanel() {
-    double i = attatcherActuators.get();
-    if (i == 1) {
-      attatcherActuators.set(0);
-    } else {
-      attatcherActuators.set(1);
+    if (isEnabled) {
+      if (attatcherAcuatorsOut) {
+        attatcherActuators.set(1);
+      } else {
+        attatcherActuators.set(0);
+      }
+
+      attatcherAcuatorsOut = !attatcherAcuatorsOut;
     }
+  }
+
+  public void setEnabled() {
+    isEnabled = true;
+  }
+
+  public void setDisabled() {
+    isEnabled = false;
   }
 }

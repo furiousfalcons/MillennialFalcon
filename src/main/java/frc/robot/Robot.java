@@ -7,10 +7,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.subsystems.AutoAssist;
 import frc.robot.subsystems.DashboardComms;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PanelManipulation;
@@ -31,6 +30,7 @@ public class Robot extends TimedRobot {
   public static VisionControl visionControl;
   public static PanelManipulation panelManipulation;
   public static DashboardComms dashComms;
+  public static AutoAssist autoAssist;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
     visionControl = new VisionControl();
     panelManipulation = new PanelManipulation();
     dashComms = new DashboardComms();
+    autoAssist = new AutoAssist();
 
     oi = new OI();
   }

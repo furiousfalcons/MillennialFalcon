@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.ArrayList;
-
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 
@@ -27,17 +25,14 @@ public class VisionControl extends Subsystem {
   // here. Call these from Commands.
 
   VisionThread visionThread;
-  UsbCamera cam;
+  public UsbCamera cam;
 
   int camResX = 640;
   int camResY = 480;
 
-  double centerXLeft = 0.0;
-  double centerYLeft = 0.0;
-  double centerXRight = 0.0;
-  double centerYRight = 0.0;
+  public Rect rectLeft, rectRight;
 
-  Object imgLock = new Object();
+  public Object imgLock = new Object();
 
   public VisionControl() {
     initVision();
@@ -50,38 +45,38 @@ public class VisionControl extends Subsystem {
   }
 
   public void initVision() {
-    cam = CameraServer.getInstance().startAutomaticCapture("Falcon Cam", 0);
-    cam.setExposureManual(20);
+    cam = CameraServer.getInstance().startAutomaticCapture();
+    cam.setExposureManual(100);
     cam.setFPS(10);
     cam.setResolution(camResX, camResY);
 
+    Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", Robot.visionControl.cam);
+    Robot.dashComms.cameraView.withPosition(4, 1);
+    Robot.dashComms.cameraView.withSize(4, 4);
+
     visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
-      System.out.println(pipeline.filterContoursOutput().size());
       if (pipeline.filterContoursOutput().size() == 2) {
         Robot.dashComms.entryIsVisionTargets.setBoolean(true);
         Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
         Rect r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+        if (r1.x > r2.x) {
+          Rect rTemp = r1;
+          r1 = r2;
+          r2 = rTemp;
+        }
         synchronized (imgLock) {
-          centerXLeft = r1.x + (r1.width / 2);
-          centerYLeft = r1.y + (r1.height / 2);
-          centerXRight = r2.x + (r2.width / 2);
-          centerYRight = r2.y + (r2.height / 2);
+          rectLeft = r1;
+          Robot.autoAssist.rectLeft = rectLeft;
+          rectRight = r2;
+          Robot.autoAssist.rectRight = rectRight;
         }
       } else {
         Robot.dashComms.entryIsVisionTargets.setBoolean(false);
       }
     });
-
+    
+    visionThread.setDaemon(true);
     visionThread.start();
-  }
-
-  public ArrayList<Double> getCenters() {
-    ArrayList<Double> values = new ArrayList<Double>();
-    values.add(centerXLeft);
-    values.add(centerYLeft);
-    values.add(centerXRight);
-    values.add(centerYRight);
-    return values;
   }
 
 }
