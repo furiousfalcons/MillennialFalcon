@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ContractArm;
 import frc.robot.commands.DecreaseThrottle;
+import frc.robot.commands.ElevateArmDown;
+import frc.robot.commands.ElevateArmStop;
+import frc.robot.commands.ElevateArmUp;
 import frc.robot.commands.EnableAutoAssist;
 import frc.robot.commands.ExtendArm;
 import frc.robot.commands.IncreaseThrottle;
@@ -62,24 +65,36 @@ public class OI {
     autoAssistButton.close();
 
     //Increase Throttle Button
-    Button incThrottleButton = new JoystickButton(controller1, 5);
+    Button incThrottleButton = new JoystickButton(controller1, 7);
     incThrottleButton.whileHeld(new IncreaseThrottle());
     incThrottleButton.close();
 
     //Decrease Throttle Button
-    Button decThrottleButton = new JoystickButton(controller1, 6);
+    Button decThrottleButton = new JoystickButton(controller1, 8);
     decThrottleButton.whileHeld(new DecreaseThrottle());
     decThrottleButton.close();
-
+    
     //Manual Panel Toggle Button
     Button panelToggleButton = new JoystickButton(controller1, 2);
     panelToggleButton.whenPressed(new TogglePanel());
     panelToggleButton.close();
+    
+    //Manual Arm Elevate Up Button
+    Button armElevateUpButton = new JoystickButton(controller1, 6);
+    armElevateUpButton.whenPressed(new ElevateArmUp());
+    armElevateUpButton.whenReleased(new ElevateArmStop());
+    armElevateUpButton.close();
+
+    //Manual Arm Elevate Down Button
+    Button armElevateDownButton = new JoystickButton(controller1, 5);
+    armElevateDownButton.whenPressed(new ElevateArmDown());
+    armElevateDownButton.whenPressed(new ElevateArmStop());
+    armElevateDownButton.close();
 
     //Manual Arm Extend Button
     Button armExtendButton = new JoystickButton(controller1, 4);
     armExtendButton.whenPressed(new ExtendArm());
-    armExtendButton.whenReleased(new StopArm());
+    armExtendButton.whenReleased(new ElevateArmStop());
     armExtendButton.close();
 
     //Manual Arm Contract Button

@@ -42,10 +42,10 @@ public class Robot extends TimedRobot {
 
     RobotMap.init();
 
-    driveTrain = new DriveTrain();
-    visionControl = new VisionControl();
-    panelManipulation = new PanelManipulation();
     dashComms = new DashboardComms();
+    driveTrain = new DriveTrain();
+    //visionControl = new VisionControl();
+    panelManipulation = new PanelManipulation();
     autoAssist = new AutoAssist();
 
     oi = new OI();

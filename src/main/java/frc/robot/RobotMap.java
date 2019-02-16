@@ -35,6 +35,7 @@ public class RobotMap {
 
   public static SpeedController PanelExtenderActuator; //actuator for extending the panel arm
   public static SpeedController PanelAttacherActuators; //mini actuators for grabbing or attaching to the panel
+  public static SpeedController PanelElevationAcutator;
 
   public static void init() {
     //PWM
@@ -45,6 +46,7 @@ public class RobotMap {
 
     PanelExtenderActuator = new Spark(4); //port 4
     PanelAttacherActuators = new Spark(5); //port 5
+    PanelElevationAcutator = new Spark(6); //port 6
     
     //DIO
 

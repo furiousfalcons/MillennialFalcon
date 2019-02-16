@@ -24,6 +24,7 @@ public class PanelManipulation extends Subsystem {
 
   public SpeedController extenderActuator = RobotMap.PanelExtenderActuator;
   public SpeedController attatcherActuators = RobotMap.PanelAttacherActuators;
+  public SpeedController elevationActuator = RobotMap.PanelElevationAcutator;
 
   public double extenderActuatorSpeed = 2.098;
 
@@ -37,6 +38,24 @@ public class PanelManipulation extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void elevateArmUp() {
+    if (isEnabled) {
+      elevationActuator.set(-1);
+    }
+  }
+
+  public void elevateArmDown() {
+    if (isEnabled) {
+      elevationActuator.set(1);
+    }
+  }
+
+  public void elevateArmStop() {
+    if (isEnabled) {
+      elevationActuator.set(0);
+    }
   }
 
   public void extendArm() {
