@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -56,6 +57,7 @@ public class PanelManipulation extends Subsystem {
     if (isEnabled) {
       elevationActuator.set(0);
     }
+
   }
 
   public void extendArm() {
@@ -64,10 +66,10 @@ public class PanelManipulation extends Subsystem {
     }
   }
 
-  public void stopArm() {
+  public void extendStopArm() {
     if (isEnabled) {
       extenderActuator.stopMotor();
-  }
+    }
   }
 
   public void contractArm() {
@@ -83,7 +85,7 @@ public class PanelManipulation extends Subsystem {
     } catch (Exception e) {
       System.out.println("Failed to delay for extendArmFor time");
     }
-    stopArm();
+    extendStopArm();
   }
 
   public void contractArmFor(double time) {
@@ -93,7 +95,7 @@ public class PanelManipulation extends Subsystem {
     } catch (Exception e) {
       System.out.println("Failed to delay for contractArmFor time");
     }
-    stopArm();
+    extendStopArm();
   }
 
   public void extendArmTo(double distance) { // distance in inches
@@ -108,8 +110,10 @@ public class PanelManipulation extends Subsystem {
     if (isEnabled) {
       if (attatcherAcuatorsOut) {
         attatcherActuators.set(1);
+        Robot.dashComms.entryisGrabber.setBoolean(false);
       } else {
         attatcherActuators.set(0);
+        Robot.dashComms.entryisGrabber.setBoolean(true);
       }
 
       attatcherAcuatorsOut = !attatcherAcuatorsOut;

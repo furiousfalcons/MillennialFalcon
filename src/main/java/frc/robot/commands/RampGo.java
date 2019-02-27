@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class StopArm extends Command {
-  public StopArm() {
+public class RampGo extends Command {
+  public RampGo() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.panelManipulation);
+    requires(Robot.rampControl);
   }
 
   // Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class StopArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.panelManipulation.stopArm();
+    Robot.rampControl.checkAndGo();
   }
 
   // Make this return true when this Command no longer needs to run execute()

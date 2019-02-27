@@ -27,11 +27,12 @@ public class AutoAssist extends Subsystem {
   public ArrayList<Integer> leftRectAlignment;
   public ArrayList<Integer> rightRectAlignment;
 
-  public Rect rectLeft, rectRight;
+  public Rect rectLeft;
+  public Rect rectRight;
 
   public AutoAssist() {
-    findBetweenValues(leftRectAlignment, 210, 235);
-    findBetweenValues(rightRectAlignment, 420, 455);
+    findLeftValues(210, 235);
+    findRightValues(420, 455);
   }
 
   @Override
@@ -79,11 +80,20 @@ public class AutoAssist extends Subsystem {
     Robot.dashComms.entryIsAutoAssist.setBoolean(false);
   }
 
-  public void findBetweenValues(ArrayList<Integer> list, int start, int end) {
-    list = new ArrayList<Integer>();
+  public void findLeftValues(int start, int end) {
+    ArrayList<Integer> list = new ArrayList<Integer>();
     for (int i = start; i <= end; i++) {
       list.add(i);
     }
+    leftRectAlignment = list;
+  }
+
+  public void findRightValues(int start, int end) {
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    for (int i = start; i <= end; i++) {
+      list.add(i);
+    }
+    rightRectAlignment = list;
   }
 
 }

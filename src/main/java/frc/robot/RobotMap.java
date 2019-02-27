@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -35,7 +36,13 @@ public class RobotMap {
 
   public static SpeedController PanelExtenderActuator; //actuator for extending the panel arm
   public static SpeedController PanelAttacherActuators; //mini actuators for grabbing or attaching to the panel
-  public static SpeedController PanelElevationAcutator;
+  public static SpeedController PanelElevationAcutator; //actuator for lifting the arm
+
+  public static SpeedController rampMotors1;
+  public static SpeedController rampMotors2;
+
+  public static SpeedControllerGroup rampMotors;
+  
 
   public static void init() {
     //PWM
@@ -47,6 +54,11 @@ public class RobotMap {
     PanelExtenderActuator = new Spark(4); //port 4
     PanelAttacherActuators = new Spark(5); //port 5
     PanelElevationAcutator = new Spark(6); //port 6
+
+    rampMotors1 = new Spark(7);
+    rampMotors2 = new Spark(8);
+
+    rampMotors = new SpeedControllerGroup(rampMotors1, rampMotors2);
     
     //DIO
 

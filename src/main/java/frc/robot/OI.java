@@ -18,7 +18,7 @@ import frc.robot.commands.ElevateArmUp;
 import frc.robot.commands.EnableAutoAssist;
 import frc.robot.commands.ExtendArm;
 import frc.robot.commands.IncreaseThrottle;
-import frc.robot.commands.StopArm;
+import frc.robot.commands.ExtendStopArm;
 import frc.robot.commands.TogglePanel;
 
 /**
@@ -94,13 +94,13 @@ public class OI {
     //Manual Arm Extend Button
     Button armExtendButton = new JoystickButton(controller1, 4);
     armExtendButton.whenPressed(new ExtendArm());
-    armExtendButton.whenReleased(new ElevateArmStop());
+    armExtendButton.whenReleased(new ExtendStopArm());
     armExtendButton.close();
 
     //Manual Arm Contract Button
     Button armContractButton = new JoystickButton(controller1, 3);
     armContractButton.whenPressed(new ContractArm());
-    armContractButton.whenReleased(new StopArm());
+    armContractButton.whenReleased(new ExtendStopArm());
     armContractButton.close();
   }
 }

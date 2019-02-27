@@ -26,9 +26,11 @@ public class DashboardComms extends Subsystem {
   public ComplexWidget visionView;
   public SimpleWidget isVisionTargets;
   public SimpleWidget isAutoAssist;
+  public SimpleWidget isGrabber;
   public SimpleWidget throttle;
   public NetworkTableEntry entryIsVisionTargets;
   public NetworkTableEntry entryIsAutoAssist;
+  public NetworkTableEntry entryisGrabber;
   public NetworkTableEntry entryLFMotor;
   public NetworkTableEntry entryLBMotor;
   public NetworkTableEntry entryRFMotor;
@@ -48,19 +50,23 @@ public class DashboardComms extends Subsystem {
   public void initDashboard() {
     tab = Shuffleboard.getTab("MillennialFalconDashboard");
     isVisionTargets = tab.add("Falcon Vision Targets Found", false);
-    isVisionTargets.withPosition(2, 1);
+    isVisionTargets.withPosition(1, 0);
     isVisionTargets.withSize(2, 1);
     entryIsVisionTargets = isVisionTargets.getEntry();
     isAutoAssist = tab.add("Falcon Auto Assist", false);
-    isAutoAssist.withPosition(2, 2);
+    isAutoAssist.withPosition(1, 1);
     isVisionTargets.withSize(2, 1);
     entryIsAutoAssist = isAutoAssist.getEntry();
+    isGrabber = tab.add("Grabber Pistons Extended", false);
+    isGrabber.withPosition(1, 2);
+    isGrabber.withSize(2, 1);
+    entryisGrabber = isGrabber.getEntry();
     /*entryLFMotor = tab.add("Left Front Motor", 0.0).getEntry();
     entryLBMotor = tab.add("Left Back Motor", 0.0).getEntry();
     entryRFMotor = tab.add("Right Front Motor", 0.0).getEntry();
     entryRBMotor = tab.add("Right Back Motor", 0.0).getEntry();*/
-    throttle = tab.add("Throttle", 50);
-    throttle.withPosition(8, 1);
+    throttle = tab.add("Throttle", 100);
+    throttle.withPosition(7, 0);
     throttle.withSize(2, 2);
     throttle.withWidget("Simple Dial");
     entryThrottle = throttle.getEntry();

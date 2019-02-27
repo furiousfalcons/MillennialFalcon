@@ -27,8 +27,8 @@ public class VisionControl extends Subsystem {
   VisionThread visionThread;
   public UsbCamera cam;
 
-  int camResX = 640;
-  int camResY = 480;
+  int camResX = 160;
+  int camResY = 120;
 
   public Rect rectLeft, rectRight;
 
@@ -50,8 +50,8 @@ public class VisionControl extends Subsystem {
     cam.setFPS(10);
     cam.setResolution(camResX, camResY);
 
-    Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", Robot.visionControl.cam);
-    Robot.dashComms.cameraView.withPosition(4, 1);
+    Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", cam);
+    Robot.dashComms.cameraView.withPosition(3, 0);
     Robot.dashComms.cameraView.withSize(4, 4);
 
     visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {

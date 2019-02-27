@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.RampControl;
 import frc.robot.subsystems.AutoAssist;
 import frc.robot.subsystems.DashboardComms;
 import frc.robot.subsystems.DriveTrain;
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   public static PanelManipulation panelManipulation;
   public static DashboardComms dashComms;
   public static AutoAssist autoAssist;
+  public static RampControl rampControl;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -44,9 +46,10 @@ public class Robot extends TimedRobot {
 
     dashComms = new DashboardComms();
     driveTrain = new DriveTrain();
-    //visionControl = new VisionControl();
+    visionControl = new VisionControl();
     panelManipulation = new PanelManipulation();
     autoAssist = new AutoAssist();
+    rampControl = new RampControl();
 
     oi = new OI();
   }

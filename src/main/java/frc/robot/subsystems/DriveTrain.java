@@ -24,7 +24,7 @@ public class DriveTrain extends Subsystem {
 
   public boolean isManualEnabled = true;
 
-  public double throttle = .5;
+  public double throttle = 1;
 
   @Override
   public void initDefaultCommand() {
