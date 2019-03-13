@@ -7,36 +7,36 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.RampGo;
-import frc.robot.RobotMap;
-import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class RampControl extends Subsystem {
+public class CargoManipulation extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public SpeedControllerGroup motors = RobotMap.rampMotors;
+  public Compressor compressor;
+  public Solenoid cylinder;
+
+  public CargoManipulation() {
+    compressor = new Compressor(0);
+    cylinder = new Solenoid(0);
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new RampGo());
   }
 
-  public void checkAndGo() {
-    if (Robot.oi.controller1.getRawAxis(3) > 0) {
-      motors.set(1);
-    } else if (Robot.oi.controller1.getRawAxis(2) > 0) {
-      motors.set(-1);
-    } else {
-      motors.set(0);
-    }
+  public void popCargo() {
+    cylinder.set(true);
   }
 
+  public void holdCargo() {
+    cylinder.set(false);
+  }
 }

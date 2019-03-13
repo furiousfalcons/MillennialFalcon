@@ -10,18 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ContractArm;
 import frc.robot.commands.DecreaseThrottle;
-import frc.robot.commands.ElevateArmDown;
-import frc.robot.commands.ElevateArmStop;
-import frc.robot.commands.ElevateArmUp;
 import frc.robot.commands.EnableAutoAssist;
-import frc.robot.commands.ExtendArm;
+import frc.robot.commands.HoldCargo;
 import frc.robot.commands.IncreaseThrottle;
-import frc.robot.commands.StrafeLeft;
-import frc.robot.commands.StrafeRight;
-import frc.robot.commands.StrafeStop;
-import frc.robot.commands.ExtendStopArm;
+import frc.robot.commands.PopCargo;
 import frc.robot.commands.TogglePanel;
 
 /**
@@ -84,6 +77,8 @@ public class OI {
     
     //Ball Pop Button
     Button ballPopButton = new JoystickButton(controller1, 3);
-    ballPopButton.whenPressed();
+    ballPopButton.whenPressed(new PopCargo());
+    ballPopButton.whenReleased(new HoldCargo());
     ballPopButton.close();
+  }
 }
