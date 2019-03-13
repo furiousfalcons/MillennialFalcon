@@ -18,6 +18,9 @@ import frc.robot.commands.ElevateArmUp;
 import frc.robot.commands.EnableAutoAssist;
 import frc.robot.commands.ExtendArm;
 import frc.robot.commands.IncreaseThrottle;
+import frc.robot.commands.StrafeLeft;
+import frc.robot.commands.StrafeRight;
+import frc.robot.commands.StrafeStop;
 import frc.robot.commands.ExtendStopArm;
 import frc.robot.commands.TogglePanel;
 
@@ -79,28 +82,8 @@ public class OI {
     panelToggleButton.whenPressed(new TogglePanel());
     panelToggleButton.close();
     
-    //Manual Arm Elevate Up Button
-    Button armElevateUpButton = new JoystickButton(controller1, 6);
-    armElevateUpButton.whenPressed(new ElevateArmUp());
-    armElevateUpButton.whenReleased(new ElevateArmStop());
-    armElevateUpButton.close();
-
-    //Manual Arm Elevate Down Button
-    Button armElevateDownButton = new JoystickButton(controller1, 5);
-    armElevateDownButton.whenPressed(new ElevateArmDown());
-    armElevateDownButton.whenPressed(new ElevateArmStop());
-    armElevateDownButton.close();
-
-    //Manual Arm Extend Button
-    Button armExtendButton = new JoystickButton(controller1, 4);
-    armExtendButton.whenPressed(new ExtendArm());
-    armExtendButton.whenReleased(new ExtendStopArm());
-    armExtendButton.close();
-
-    //Manual Arm Contract Button
-    Button armContractButton = new JoystickButton(controller1, 3);
-    armContractButton.whenPressed(new ContractArm());
-    armContractButton.whenReleased(new ExtendStopArm());
-    armContractButton.close();
-  }
+    //Ball Pop Button
+    Button ballPopButton = new JoystickButton(controller1, 3);
+    ballPopButton.whenPressed();
+    ballPopButton.close();
 }

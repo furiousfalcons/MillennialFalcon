@@ -29,10 +29,9 @@ public class PanelManipulation extends Subsystem {
 
   public double extenderActuatorSpeed = 2.098;
 
-  public boolean attatcherAcuatorsOut = true;
+  public boolean attatcherAcuatorsOut = false;
 
   public PanelManipulation() {
-    togglePanel();
   }
 
   @Override

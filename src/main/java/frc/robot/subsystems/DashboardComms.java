@@ -65,7 +65,7 @@ public class DashboardComms extends Subsystem {
     entryLBMotor = tab.add("Left Back Motor", 0.0).getEntry();
     entryRFMotor = tab.add("Right Front Motor", 0.0).getEntry();
     entryRBMotor = tab.add("Right Back Motor", 0.0).getEntry();*/
-    throttle = tab.add("Throttle", 100);
+    throttle = tab.add("Throttle", 75);
     throttle.withPosition(7, 0);
     throttle.withSize(2, 2);
     throttle.withWidget("Simple Dial");

@@ -22,9 +22,16 @@ public class DriveTrain extends Subsystem {
 
   public MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
 
+  public double x = 0;
+  public double y = 0;
+  public double z = 0;
+
   public boolean isManualEnabled = true;
 
-  public double throttle = 1;
+  public boolean isStrafeR = false;
+  public boolean isStrafeL = false;
+
+  public double throttle = .75;
 
   @Override
   public void initDefaultCommand() {
@@ -33,10 +40,29 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new NormalDrive());
   }
 
+  public void strafeRight(boolean b) {
+    isStrafeR = b;
+  }
+
+  public void strafeLeft(boolean b) {
+    isStrafeL = b;
+  }
+
   public void normalDrive() {
     if (isManualEnabled) {
-      drive.driveCartesian(Robot.oi.controller1.getRawAxis(0) * throttle,
-          -Robot.oi.controller1.getRawAxis(1) * throttle, Robot.oi.controller1.getRawAxis(4));
+      if (isStrafeL) {
+        while (isStrafeL) {
+          System.out.println("Strafe Left");
+          drive.driveCartesian(-.5, 0, 0);
+        }
+      } else if (isStrafeR) {
+        while (isStrafeR) {
+          drive.driveCartesian(.5, 0, 0);
+        }
+      } else {
+        drive.driveCartesian(Robot.oi.controller1.getRawAxis(0), -Robot.oi.controller1.getRawAxis(1) * throttle,
+            Robot.oi.controller1.getRawAxis(4));
+      }
     }
   }
 
