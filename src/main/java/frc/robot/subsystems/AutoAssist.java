@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import org.opencv.core.Rect;
 
@@ -42,31 +41,7 @@ public class AutoAssist extends Subsystem {
   }
 
   public void autoAssist() {
-
-    //add angled autoAssist code here
-    
-    while ( (!leftRectAlignment.contains(rectLeft.x)) || (!rightRectAlignment.contains(rectRight.x)) ) {
-      if (rectLeft.x < leftRectAlignment.get(0)) {
-        //move right
-        Robot.driveTrain.autoNormalDrive(0, 1, 0);
-        try {
-          TimeUnit.SECONDS.sleep(Double.doubleToLongBits(0.1));
-        } catch (Exception e) {
-          System.out.println("Failed to delay for AutoAssist-MoveRight time");
-        }
-      } else if (rectLeft.x > leftRectAlignment.get(leftRectAlignment.size())) {
-        //move left
-        Robot.driveTrain.autoNormalDrive(0, -1, 0);
-        try {
-          TimeUnit.SECONDS.sleep(Double.doubleToLongBits(0.1));
-        } catch (Exception e) {
-          System.out.println("Failed to delay for AutoAssist-MoveLeft time");
-        }
-      } else {
-        //should stop while loop
-      }
-    }
-
+    //autoassist stuff
   }
 
   public void enableAutoAssist() {

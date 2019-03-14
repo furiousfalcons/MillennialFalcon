@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.NormalDrive;
+import frc.robot.commands.ExecuteDrive;
 
 /**
  * Add your docs here.
@@ -23,7 +23,7 @@ public class DriveTrain extends Subsystem {
   public MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
 
   public boolean isManualEnabled = true;
-  public boolean isNormalDrive = true;
+  public boolean isReverseDrive = false;
 
   public double throttle = .75;
 
@@ -31,13 +31,19 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new NormalDrive());
+    setDefaultCommand(new ExecuteDrive());
   }
 
-  public void normalDrive() {
-    if (isManualEnabled && isNormalDrive) {
+  public void executeDrive() {
+    if (isManualEnabled && !isReverseDrive) {
       drive.driveCartesian(Robot.oi.controller1.getRawAxis(0), -Robot.oi.controller1.getRawAxis(1) * throttle, Robot.oi.controller1.getRawAxis(4));
+    } else if (isManualEnabled && isReverseDrive) {
+      drive.driveCartesian(-Robot.oi.controller1.getRawAxis(0), Robot.oi.controller1.getRawAxis(1) * throttle, Robot.oi.controller1.getRawAxis(4));
     }
+  }
+
+  public void toggleReverseDrive() {
+    isReverseDrive = !isReverseDrive;
   }
 
   public void stopDrive() {
@@ -71,12 +77,6 @@ public class DriveTrain extends Subsystem {
       percent -= 1;
       throttle = percent / 100;
       Robot.dashComms.entryThrottle.setDouble(percent);
-    }
-  }
-
-  public void autoNormalDrive(double ySpeed, double xSpeed, double zSpeed) {
-    if (Robot.autoAssist.isEnabled) {
-      drive.driveCartesian(ySpeed, xSpeed, zSpeed);
     }
   }
 

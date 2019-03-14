@@ -16,6 +16,7 @@ import frc.robot.commands.HoldCargo;
 import frc.robot.commands.IncreaseThrottle;
 import frc.robot.commands.PopCargo;
 import frc.robot.commands.TogglePanel;
+import frc.robot.commands.ToggleReverseDrive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -80,5 +81,11 @@ public class OI {
     ballPopButton.whenPressed(new PopCargo());
     ballPopButton.whenReleased(new HoldCargo());
     ballPopButton.close();
+
+    //Reverse DriveTrain Button
+    Button reverseDTButton = new JoystickButton(controller1, 4);
+    reverseDTButton.whenPressed(new ToggleReverseDrive());
+    reverseDTButton.close();
+    
   }
 }
