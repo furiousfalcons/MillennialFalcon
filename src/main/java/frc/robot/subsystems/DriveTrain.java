@@ -20,30 +20,36 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public MecanumDrive drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
+  public MecanumDrive drive;
 
   public boolean isManualEnabled = true;
   public boolean isReverseDrive = false;
 
   public double throttle = .75;
 
+  public DriveTrain() {
+    drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
+    drive.setSafetyEnabled(false);
+  }
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new ExecuteDrive());
   }
 
   public void executeDrive() {
-    if (isManualEnabled && !isReverseDrive) {
+    Robot.dashComms.entryIsNormalDrive.setBoolean(!isReverseDrive);
+    if (!isReverseDrive) {
       drive.driveCartesian(Robot.oi.controller1.getRawAxis(0), -Robot.oi.controller1.getRawAxis(1) * throttle, Robot.oi.controller1.getRawAxis(4));
-    } else if (isManualEnabled && isReverseDrive) {
+    } else if (isReverseDrive) {
       drive.driveCartesian(-Robot.oi.controller1.getRawAxis(0), Robot.oi.controller1.getRawAxis(1) * throttle, Robot.oi.controller1.getRawAxis(4));
     }
   }
 
   public void toggleReverseDrive() {
-    isReverseDrive = !isReverseDrive;
+    boolean test = !isReverseDrive;
+    isReverseDrive = test;
   }
 
   public void stopDrive() {

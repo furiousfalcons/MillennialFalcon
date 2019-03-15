@@ -28,6 +28,7 @@ public class DashboardComms extends Subsystem {
   public SimpleWidget isAutoAssist;
   public SimpleWidget isGrabber;
   public SimpleWidget throttle;
+  public SimpleWidget isNormalDrive;
   public NetworkTableEntry entryIsVisionTargets;
   public NetworkTableEntry entryIsAutoAssist;
   public NetworkTableEntry entryisGrabber;
@@ -36,6 +37,7 @@ public class DashboardComms extends Subsystem {
   public NetworkTableEntry entryRFMotor;
   public NetworkTableEntry entryRBMotor;
   public NetworkTableEntry entryThrottle;
+  public NetworkTableEntry entryIsNormalDrive;
 
   public DashboardComms() {
     initDashboard();
@@ -49,18 +51,14 @@ public class DashboardComms extends Subsystem {
 
   public void initDashboard() {
     tab = Shuffleboard.getTab("MillennialFalconDashboard");
-    isVisionTargets = tab.add("Falcon Vision Targets Found", false);
-    isVisionTargets.withPosition(1, 0);
-    isVisionTargets.withSize(2, 1);
-    entryIsVisionTargets = isVisionTargets.getEntry();
-    isAutoAssist = tab.add("Falcon Auto Assist", false);
-    isAutoAssist.withPosition(1, 1);
-    isVisionTargets.withSize(2, 1);
-    entryIsAutoAssist = isAutoAssist.getEntry();
     isGrabber = tab.add("Grabber Pistons Extended", false);
-    isGrabber.withPosition(1, 2);
+    isGrabber.withPosition(1, 0);
     isGrabber.withSize(2, 1);
     entryisGrabber = isGrabber.getEntry();
+    isNormalDrive = tab.add("Normal Drive", true);
+    isNormalDrive.withPosition(1, 1);
+    isNormalDrive.withSize(2, 1);
+    entryIsNormalDrive = isNormalDrive.getEntry();
     /*entryLFMotor = tab.add("Left Front Motor", 0.0).getEntry();
     entryLBMotor = tab.add("Left Back Motor", 0.0).getEntry();
     entryRFMotor = tab.add("Right Front Motor", 0.0).getEntry();
@@ -70,6 +68,14 @@ public class DashboardComms extends Subsystem {
     throttle.withSize(2, 2);
     throttle.withWidget("Simple Dial");
     entryThrottle = throttle.getEntry();
+    isVisionTargets = tab.add("Falcon Vision Targets Found", false);
+    isVisionTargets.withPosition(7, 2);
+    isVisionTargets.withSize(2, 1);
+    entryIsVisionTargets = isVisionTargets.getEntry();
+    isAutoAssist = tab.add("Falcon Auto Assist", false);
+    isAutoAssist.withPosition(7, 3);
+    isVisionTargets.withSize(2, 1);
+    entryIsAutoAssist = isAutoAssist.getEntry();
     //visionView = tab.add("Falcon Vision Target Locator", idk);
   }
 }
