@@ -35,7 +35,12 @@ public class VisionControl extends Subsystem {
   public Object imgLock = new Object();
 
   public VisionControl() {
+    try{
     initVision();
+    }
+    catch(Exception e){
+      System.out.print(e.getStackTrace());
+    }
   }
 
   @Override
@@ -45,38 +50,39 @@ public class VisionControl extends Subsystem {
   }
 
   public void initVision() {
-    cam = CameraServer.getInstance().startAutomaticCapture();
-    cam.setExposureManual(100);
-    cam.setFPS(10);
-    cam.setResolution(camResX, camResY);
+    CameraServer.getInstance().startAutomaticCapture();
+  //   cam = CameraServer.getInstance().startAutomaticCapture();
+  //   cam.setExposureManual(100);
+  //   cam.setFPS(10);
+  //   cam.setResolution(camResX, camResY);
 
-    Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", cam);
-    Robot.dashComms.cameraView.withPosition(3, 0);
-    Robot.dashComms.cameraView.withSize(4, 4);
+  //   Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", cam);
+  //   Robot.dashComms.cameraView.withPosition(3, 0);
+  //   Robot.dashComms.cameraView.withSize(4, 4);
 
-    visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
-      if (pipeline.filterContoursOutput().size() == 2) {
-        Robot.dashComms.entryIsVisionTargets.setBoolean(true);
-        Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-        Rect r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
-        if (r1.x > r2.x) {
-          Rect rTemp = r1;
-          r1 = r2;
-          r2 = rTemp;
-        }
-        synchronized (imgLock) {
-          rectLeft = r1;
-          Robot.autoAssist.rectLeft = rectLeft;
-          rectRight = r2;
-          Robot.autoAssist.rectRight = rectRight;
-        }
-      } else {
-        Robot.dashComms.entryIsVisionTargets.setBoolean(false);
-      }
-    });
+  //   visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
+  //     if (pipeline.filterContoursOutput().size() == 2) {
+  //       Robot.dashComms.entryIsVisionTargets.setBoolean(true);
+  //       Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+  //       Rect r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+  //       if (r1.x > r2.x) {
+  //         Rect rTemp = r1;
+  //         r1 = r2;
+  //         r2 = rTemp;
+  //       }
+  //       synchronized (imgLock) {
+  //         rectLeft = r1;
+  //         Robot.autoAssist.rectLeft = rectLeft;
+  //         rectRight = r2;
+  //         Robot.autoAssist.rectRight = rectRight;
+  //       }
+  //     } else {
+  //       Robot.dashComms.entryIsVisionTargets.setBoolean(false);
+  //     }
+  //   });
     
-    visionThread.setDaemon(true);
-    visionThread.start();
-  }
+  //   visionThread.setDaemon(true);
+  //   visionThread.start();
+  // }
 
 }
