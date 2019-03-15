@@ -21,7 +21,6 @@ public class ToggleReverseDrive extends Command {
   @Override
   protected void initialize() {
     Robot.driveTrain.toggleReverseDrive();
-    end();
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -29,13 +29,13 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
     drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
-    drive.setSafetyEnabled(false);
+    //drive.setSafetyEnabled(false);
   }
   
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+   setDefaultCommand(new ExecuteDrive());
   }
 
   public void executeDrive() {
@@ -48,8 +48,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void toggleReverseDrive() {
-    boolean test = !isReverseDrive;
-    isReverseDrive = test;
+    isReverseDrive = !isReverseDrive;
   }
 
   public void stopDrive() {
