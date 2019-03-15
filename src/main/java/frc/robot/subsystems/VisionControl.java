@@ -93,7 +93,7 @@ public class VisionControl extends Subsystem {
   public void switchCameras(){
     if(camera1Active){
       camServer.setSource(cam2);
-      System.out.println("Camera switched to: Cam 2")
+      System.out.println("Camera switched to: Cam 2");
     }
     else{
       camServer.setSource(cam1);

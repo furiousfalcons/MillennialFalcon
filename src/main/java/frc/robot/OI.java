@@ -10,12 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.SwitchCameras;
 import frc.robot.commands.EnableAutoAssist;
 import frc.robot.commands.HoldCargo;
 import frc.robot.commands.IncreaseThrottle;
 import frc.robot.commands.PopCargo;
-import frc.robot.commands.TogglePanel;
+import frc.robot.commands.SwitchCameras;
 import frc.robot.commands.ToggleReverseDrive;
 
 /**
