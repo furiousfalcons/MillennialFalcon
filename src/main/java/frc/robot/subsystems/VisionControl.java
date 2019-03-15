@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import org.opencv.core.Rect;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,7 +23,10 @@ public class VisionControl extends Subsystem {
   // here. Call these from Commands.
 
   VisionThread visionThread;
-  public UsbCamera cam;
+  public UsbCamera cam1;
+  public UsbCamera cam2;
+  public VideoSink camServer;
+  public boolean camera1Active = true;
 
   int camResX = 160;
   int camResY = 120;
@@ -47,8 +51,10 @@ public class VisionControl extends Subsystem {
   }
 
   public void initVision() {
-    CameraServer.getInstance().startAutomaticCapture();
-  //   cam = CameraServer.getInstance().startAutomaticCapture();
+    cam1 = CameraServer.getInstance().startAutomaticCapture(0);
+    cam2 = CameraServer.getInstance().startAutomaticCapture(1);
+    camServer = CameraServer.getInstance().getServer();
+
   //   cam.setExposureManual(100);
   //   cam.setFPS(10);
   //   cam.setResolution(camResX, camResY);
@@ -81,6 +87,19 @@ public class VisionControl extends Subsystem {
   //   visionThread.setDaemon(true);
   //   visionThread.start();
   // }
+
+  }
+
+  public void switchCameras(){
+    if(camera1Active){
+      camServer.setSource(cam2);
+      System.out.println("Camera switched to: Cam 2")
+    }
+    else{
+      camServer.setSource(cam1);
+      System.out.println("Camera switched to: Cam 1");
+    }
+    camera1Active = !camera1Active;
 
   }
 }

@@ -10,17 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TogglePanel extends Command {
-  public TogglePanel() {
+public class SwitchCameras extends Command {
+  public SwitchCameras() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.panelManipulation);
+    requires(Robot.visionControl);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.panelManipulation.togglePanel();
+    Robot.visionControl.switchCameras();
   }
 
   // Called repeatedly when this Command is scheduled to run

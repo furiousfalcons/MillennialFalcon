@@ -7,12 +7,11 @@
 
 package frc.robot.subsystems;
 
-import java.util.concurrent.TimeUnit;
-
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.ManipulatePanel;
 
 /**
  * Add your docs here.
@@ -37,11 +36,12 @@ public class PanelManipulation extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+     setDefaultCommand(new ManipulatePanel());
+
   }
 
   public void togglePanel() {
-    if (isEnabled) {
+    if (Robot.oi.controller1.getRawAxis(3) < 0.6) {
       if (attatcherAcuatorsOut) {
         attatcherActuators.set(1);
         Robot.dashComms.entryisGrabber.setBoolean(false);
@@ -50,7 +50,7 @@ public class PanelManipulation extends Subsystem {
         Robot.dashComms.entryisGrabber.setBoolean(true);
       }
 
-      attatcherAcuatorsOut = !attatcherAcuatorsOut;
+      //attatcherAcuatorsOut = !attatcherAcuatorsOut;
     }
   }
 

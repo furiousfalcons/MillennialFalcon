@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.DecreaseThrottle;
+import frc.robot.commands.SwitchCameras;
 import frc.robot.commands.EnableAutoAssist;
 import frc.robot.commands.HoldCargo;
 import frc.robot.commands.IncreaseThrottle;
@@ -68,21 +68,24 @@ public class OI {
 
     //Decrease Throttle Button
     Button decThrottleButton = new JoystickButton(controller1, 8);
-    decThrottleButton.whileHeld(new DecreaseThrottle());
+    decThrottleButton.whileHeld(new SwitchCameras());
     decThrottleButton.close();
     
     //Manual Panel Toggle Button
-    Button panelToggleButton = new JoystickButton(controller1, 2);
-    panelToggleButton.whenPressed(new TogglePanel());
-    panelToggleButton.close();
+    // Button panelToggleButton = new JoystickButton(controller1, 2);
+    // panelToggleButton.whenPressed(new TogglePanel());
+    // panelToggleButton.close();
     
     //Ball Pop Button (uncomment to get to work again)
-    // Button ballPopButton = new JoystickButton(controller1, 3);
-    // ballPopButton.whenPressed(new PopCargo());
-    // ballPopButton.whenReleased(new HoldCargo());
+     Button ballPopButton = new JoystickButton(controller1, 3);
+     ballPopButton.whenPressed(new PopCargo());
+     ballPopButton.whenReleased(new HoldCargo());
 
-    //Experimental Xbox Trigger for Ball Hold
-    
+    //Experimental Xbox Trigger for Cargo Hold
+
+    //Camera Switch Button
+    Button camButton = new JoystickButton(controller1, 1);
+    camButton.whenPressed(new SwitchCameras());
 
     //Reverse DriveTrain Button
     Button reverseDTButton = new JoystickButton(controller1, 4);

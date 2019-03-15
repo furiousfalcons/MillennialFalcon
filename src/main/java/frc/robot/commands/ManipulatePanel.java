@@ -10,27 +10,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DetectBallGrab extends Command {
-  public DetectBallGrab() {
+public class ManipulatePanel extends Command {
+  public ManipulatePanel() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.cargoManipulation);
+    requires(Robot.panelManipulation);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.oi.controller1.getRawAxis(3) > 0.6) { //All the way down is 1, let go is 0.5, using a 1.0 deadspace to prevent accidents
-      Robot.cargoManipulation.popCargo();
-    }
-    else{
-      Robot.cargoManipulation.holdCargo();
-    } 
+    Robot.panelManipulation.togglePanel();
   }
 
   // Make this return true when this Command no longer needs to run execute()
