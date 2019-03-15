@@ -7,6 +7,17 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.DecreaseThrottle;
+import frc.robot.commands.EnableAutoAssist;
+import frc.robot.commands.HoldCargo;
+import frc.robot.commands.IncreaseThrottle;
+import frc.robot.commands.PopCargo;
+import frc.robot.commands.TogglePanel;
+import frc.robot.commands.ToggleReverseDrive;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -39,4 +50,42 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+  
+  public XboxController controller1;
+
+  public OI() {
+    controller1 = new XboxController(0);
+
+    //Enable Auto Assist Button
+    Button autoAssistButton = new JoystickButton(controller1, 1);
+    autoAssistButton.whenPressed(new EnableAutoAssist());
+    autoAssistButton.close();
+
+    //Increase Throttle Button
+    Button incThrottleButton = new JoystickButton(controller1, 7);
+    incThrottleButton.whileHeld(new IncreaseThrottle());
+    incThrottleButton.close();
+
+    //Decrease Throttle Button
+    Button decThrottleButton = new JoystickButton(controller1, 8);
+    decThrottleButton.whileHeld(new DecreaseThrottle());
+    decThrottleButton.close();
+    
+    //Manual Panel Toggle Button
+    Button panelToggleButton = new JoystickButton(controller1, 2);
+    panelToggleButton.whenPressed(new TogglePanel());
+    panelToggleButton.close();
+    
+    //Ball Pop Button
+    Button ballPopButton = new JoystickButton(controller1, 3);
+    ballPopButton.whenPressed(new PopCargo());
+    ballPopButton.whenReleased(new HoldCargo());
+    ballPopButton.close();
+
+    //Reverse DriveTrain Button
+    Button reverseDTButton = new JoystickButton(controller1, 4);
+    reverseDTButton.whenPressed(new ToggleReverseDrive());
+    reverseDTButton.close();
+    
+  }
 }
