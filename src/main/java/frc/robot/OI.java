@@ -76,11 +76,10 @@ public class OI {
     panelToggleButton.whenPressed(new TogglePanel());
     panelToggleButton.close();
     
-    //Ball Pop Button
-    Button ballPopButton = new JoystickButton(controller1, 3);
-    ballPopButton.whenPressed(new PopCargo());
-    ballPopButton.whenReleased(new HoldCargo());
-    ballPopButton.close();
+    //Ball Pop Button (uncomment to get to work again)
+    // Button ballPopButton = new JoystickButton(controller1, 3);
+    // ballPopButton.whenPressed(new PopCargo());
+    // ballPopButton.whenReleased(new HoldCargo());
 
     //Reverse DriveTrain Button
     Button reverseDTButton = new JoystickButton(controller1, 4);

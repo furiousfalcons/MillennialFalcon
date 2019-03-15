@@ -8,14 +8,11 @@
 package frc.robot.subsystems;
 
 import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
-import frc.robot.VisionImplementation;
 
 /**
  * Add your docs here.
