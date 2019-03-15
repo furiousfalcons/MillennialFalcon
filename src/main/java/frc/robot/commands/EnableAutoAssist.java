@@ -25,7 +25,7 @@ public class EnableAutoAssist extends Command {
   @Override
   protected void initialize() {
     Robot.driveTrain.disableDrive();
-    Robot.panelManipulation.setDisabled();
+   // Robot.panelManipulation.setDisabled();
     Robot.autoAssist.enableAutoAssist();
   }
 
@@ -44,7 +44,7 @@ public class EnableAutoAssist extends Command {
   @Override
   protected void end() {
     Robot.autoAssist.disableAutoAssist();
-    Robot.panelManipulation.setEnabled();
+    //Robot.panelManipulation.setEnabled();
     Robot.driveTrain.enableDrive();
   }
 
