@@ -79,12 +79,14 @@ public class OI {
      Button ballPopButton = new JoystickButton(controller1, 3);
      ballPopButton.whenPressed(new PopCargo());
      ballPopButton.whenReleased(new HoldCargo());
+     ballPopButton.close();
 
     //Experimental Xbox Trigger for Cargo Hold
 
     //Camera Switch Button
     Button camButton = new JoystickButton(controller1, 1);
     camButton.whenPressed(new SwitchCameras());
+    camButton.close();
 
     //Reverse DriveTrain Button
     Button reverseDTButton = new JoystickButton(controller1, 4);
