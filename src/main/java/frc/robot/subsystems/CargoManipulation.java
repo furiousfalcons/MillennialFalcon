@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.DetectBallGrab;
 
 /**
  * Add your docs here.
@@ -29,7 +30,7 @@ public class CargoManipulation extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+     setDefaultCommand(new DetectBallGrab());
   }
 
   public void popCargo() {
