@@ -15,12 +15,14 @@ public class ToggleReverseDrive extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
+    requires(Robot.visionControl);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.driveTrain.toggleReverseDrive();
+    Robot.visionControl.switchCameras();
   }
 
   // Called repeatedly when this Command is scheduled to run

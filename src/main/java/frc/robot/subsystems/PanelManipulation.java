@@ -41,16 +41,17 @@ public class PanelManipulation extends Subsystem {
   }
 
   public void togglePanel() {
-    if (Robot.oi.controller1.getRawAxis(3) < 0.6) {
-      if (attatcherAcuatorsOut) {
+    if (Robot.oi.controller1.getRawAxis(3) > 0.6) {
+      //if (attatcherAcuatorsOut) {
         attatcherActuators.set(1);
         Robot.dashComms.entryisGrabber.setBoolean(false);
-      } else {
-        attatcherActuators.set(0);
-        Robot.dashComms.entryisGrabber.setBoolean(true);
-      }
+      //} else {
+      
 
       //attatcherAcuatorsOut = !attatcherAcuatorsOut;
+    } else {
+      attatcherActuators.set(0);
+      Robot.dashComms.entryisGrabber.setBoolean(true);
     }
   }
 
