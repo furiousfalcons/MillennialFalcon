@@ -20,14 +20,11 @@ public class PanelManipulation extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public boolean isEnabled = true;
-
   public SpeedController extenderActuator = RobotMap.PanelExtenderActuator;
   public SpeedController attatcherActuators = RobotMap.PanelAttacherActuators;
   public SpeedController elevationActuator = RobotMap.PanelElevationAcutator;
 
   public double extenderActuatorSpeed = 2.098;
-
   public boolean attatcherAcuatorsOut = false;
 
   public PanelManipulation() {
@@ -42,24 +39,13 @@ public class PanelManipulation extends Subsystem {
 
   public void togglePanel() {
     if (Robot.oi.controller1.getRawAxis(3) > 0.6) {
-      //if (attatcherAcuatorsOut) {
         attatcherActuators.set(1);
         Robot.dashComms.entryisGrabber.setBoolean(false);
-      //} else {
-      
 
-      //attatcherAcuatorsOut = !attatcherAcuatorsOut;
-    } else {
+    } 
+    else {
       attatcherActuators.set(0);
       Robot.dashComms.entryisGrabber.setBoolean(true);
     }
-  }
-
-  public void setEnabled() {
-    isEnabled = true;
-  }
-
-  public void setDisabled() {
-    isEnabled = false;
   }
 }

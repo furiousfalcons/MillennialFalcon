@@ -16,6 +16,7 @@ import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Add your docs here.
@@ -29,13 +30,6 @@ public class VisionControl extends Subsystem {
   public UsbCamera cam2;
   public VideoSink camServer;
   public boolean camera1Active = true;
-
-  int camResX = 160;
-  int camResY = 120;
-
-  public Rect rectLeft, rectRight;
-
-  public Object imgLock = new Object();
 
   public VisionControl() {
     try{
@@ -53,55 +47,40 @@ public class VisionControl extends Subsystem {
   }
 
   public void initVision() {
-    cam1 = CameraServer.getInstance().startAutomaticCapture(0);
-    cam2 = CameraServer.getInstance().startAutomaticCapture(1);
-    camServer = CameraServer.getInstance().getServer();
-
-  //   cam.setExposureManual(100);
-  //   cam.setFPS(10);
-  //   cam.setResolution(camResX, camResY);
+    try {  // Used try catch so if one camera fails then the whole robot doesn't crash
+      cam1 = CameraServer.getInstance().startAutomaticCapture(0);
+    } catch (Exception e) {
+      System.out.println(e.getStackTrace());
+      System.err.println("Camera 1 failed, check log for error");
+    }
+    
+    try {
+      cam2 = CameraServer.getInstance().startAutomaticCapture(1);
+    } catch (Exception e) {
+      System.out.println(e.getStackTrace());
+      System.err.println("Camera 2 failed, check log for error");
+    }
 
     /*Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", camServer.getSource());
     Robot.dashComms.cameraView.withPosition(3, 0);
     Robot.dashComms.cameraView.withSize(4, 4);*/
 
-  //   visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
-  //     if (pipeline.filterContoursOutput().size() == 2) {
-  //       Robot.dashComms.entryIsVisionTargets.setBoolean(true);
-  //       Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-  //       Rect r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
-  //       if (r1.x > r2.x) {
-  //         Rect rTemp = r1;
-  //         r1 = r2;
-  //         r2 = rTemp;
-  //       }
-  //       synchronized (imgLock) {
-  //         rectLeft = r1;
-  //         Robot.autoAssist.rectLeft = rectLeft;
-  //         rectRight = r2;
-  //         Robot.autoAssist.rectRight = rectRight;
-  //       }
-  //     } else {
-  //       Robot.dashComms.entryIsVisionTargets.setBoolean(false);
-  //     }
-  //   });
-    
-  //   visionThread.setDaemon(true);
-  //   visionThread.start();
-  // }
+    cam1.setFPS(30); //Attempt at fixing bad camera FPS
+    cam2.setFPS(30);
 
   }
 
-  public void switchCameras(){
-    if(camera1Active){
+  public void switchCameras() {
+    if(camera1Active) {
       camServer.setSource(cam2);
       System.out.println("Camera switched to: Cam 2");
     }
-    else{
+    else {
       camServer.setSource(cam1);
       System.out.println("Camera switched to: Cam 1");
     }
-    camera1Active = !camera1Active;
 
+    SmartDashboard.putBoolean("Primary Camera", camera1Active);
+    camera1Active = !camera1Active;
   }
 }
