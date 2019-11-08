@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.*;
+
 import org.opencv.core.Rect;
 
 import edu.wpi.cscore.UsbCamera;
@@ -37,7 +39,7 @@ public class VisionControl extends Subsystem {
 
   public VisionControl() {
     try{
-    initVision();
+      initVision();
     }
     catch(Exception e){
       System.out.print(e.getStackTrace());
@@ -59,9 +61,9 @@ public class VisionControl extends Subsystem {
   //   cam.setFPS(10);
   //   cam.setResolution(camResX, camResY);
 
-  //   Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", cam);
-  //   Robot.dashComms.cameraView.withPosition(3, 0);
-  //   Robot.dashComms.cameraView.withSize(4, 4);
+    /*Robot.dashComms.cameraView = Robot.dashComms.tab.add("Falcon Cam", camServer.getSource());
+    Robot.dashComms.cameraView.withPosition(3, 0);
+    Robot.dashComms.cameraView.withSize(4, 4);*/
 
   //   visionThread = new VisionThread(cam, new VisionImplementation(), pipeline -> {
   //     if (pipeline.filterContoursOutput().size() == 2) {

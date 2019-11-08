@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem {
   public boolean isManualEnabled = true;
   public boolean isReverseDrive = false;
 
-  public double throttle = .75;
+  public double throttle = 1;
 
   public DriveTrain() {
     drive = new MecanumDrive(RobotMap.LFMotor, RobotMap.LBMotor, RobotMap.RFMotor, RobotMap.RBMotor);
